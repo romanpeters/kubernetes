@@ -28,7 +28,7 @@ metadata:
     exposure: internal
 spec:
   redirectRegex:
-    regex: ^https?://(www\.)?romanpeters\.nl/(?!eskimos/?$)(.*)
+    regex: ^https?://(www\.)?romanpeters\.nl/(.*)
     replacement: https://hello.romanpeters.nl/$2
     permanent: true
 ---
