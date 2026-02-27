@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authentik-outpost-code
+  namespace: infrastructure
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure-int,websecure-pub
+  labels:
+    app.kubernetes.io/name: authentik-outpost-code
+    app.kubernetes.io/instance: authentik-outpost-code-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: romanpeters-nl-tls
+      hosts:
+        - code.romanpeters.nl
+  rules:
+    - host: code.romanpeters.nl
+      http:
+        paths:
+          - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-traefik-outpost
+                port:
+                  number: 9000

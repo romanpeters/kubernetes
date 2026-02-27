@@ -8,6 +8,7 @@ resources:
   - helmrepo.yaml
   - authentik-secrets.sops.yaml
   - authentik-forward-auth-middleware.yaml
+  - code-html-extensionless-middleware.yaml
   - lan-allow-10-8-middleware.yaml
   - helmrelease.yaml
   - garage-config.yaml
@@ -17,6 +18,8 @@ resources:
   - garage-service.yaml
   - garage-ingress.yaml
   - garage-web-ingress.yaml
+  - garage-web-code-ingress.yaml
+  - garage-web-code-honden-auth-ingress.yaml
   - garage-webui-deployment.yaml
   - garage-webui-service.yaml
   - garage-webui-ingress.yaml
@@ -26,6 +29,7 @@ resources:
   - homepage-deployment.yaml
   - homepage-service.yaml
   - homepage-ingress.yaml
+  - authentik-outpost-code-ingress.yaml
   - authentik-outpost-homepage-ingress.yaml
   - homepage-tv-config.yaml
   - homepage-tv-deployment.yaml

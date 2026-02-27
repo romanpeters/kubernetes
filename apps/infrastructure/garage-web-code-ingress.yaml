@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: garage-web-code
+  namespace: infrastructure
+  annotations:
+    external-dns: external
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure-int,websecure-pub
+    traefik.ingress.kubernetes.io/router.middlewares: infrastructure-code-html-extensionless@kubernetescrd
+  labels:
+    app.kubernetes.io/name: garage-web-code
+    app.kubernetes.io/instance: garage-web-code-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: code.romanpeters.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: garage
+                port:
+                  name: web

@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: code-html-extensionless
+  namespace: infrastructure
+  labels:
+    app.kubernetes.io/name: code-html-extensionless
+    app.kubernetes.io/instance: code-html-extensionless-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  replacePathRegex:
+    regex: "^/(.*/)?([^/.]+)$"
+    replacement: "/${1}${2}.html"
