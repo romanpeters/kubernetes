@@ -35,7 +35,7 @@ spec:
             - name: APP_NAME
               value: "romanpeters"
             - name: APP_URL
-              value: "https://goodbye.romanpeters.nl"
+              value: "https://hello.romanpeters.nl"
           volumeMounts:
             - name: config
               mountPath: /config
