@@ -1,6 +1,23 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
+  name: heimdall-redirect-eskimos
+  namespace: general
+  labels:
+    app.kubernetes.io/name: heimdall-redirect-eskimos
+    app.kubernetes.io/instance: heimdall-redirect-eskimos-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  redirectRegex:
+    regex: ^https?://(www\.)?romanpeters\.nl/eskimos/?$
+    replacement: https://code.romanpeters.nl/honden/eskimos
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
   name: heimdall-redirect-root
   namespace: general
   labels:
@@ -11,7 +28,7 @@ metadata:
     exposure: internal
 spec:
   redirectRegex:
-    regex: ^https?://(www\.)?romanpeters\.nl/(.*)
+    regex: ^https?://(www\.)?romanpeters\.nl/(?!eskimos/?$)(.*)
     replacement: https://hello.romanpeters.nl/$2
     permanent: true
 ---
@@ -23,7 +40,7 @@ metadata:
   annotations:
     external-dns: external
     traefik.ingress.kubernetes.io/router.entrypoints: websecure-int,websecure-pub
-    traefik.ingress.kubernetes.io/router.middlewares: general-heimdall-redirect-root@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: general-heimdall-redirect-eskimos@kubernetescrd,general-heimdall-redirect-root@kubernetescrd
   labels:
     app.kubernetes.io/name: heimdall-root-alias
     app.kubernetes.io/instance: heimdall-root-alias-prod
