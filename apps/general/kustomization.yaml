@@ -9,10 +9,10 @@ resources:
   - n8n-deployment.yaml
   - n8n-service.yaml
   - n8n-ingress.yaml
-  - heimdall-deployment.yaml
   - heimdall-service.yaml
-  - heimdall-ingress.yaml
   - heimdall-redirects.yaml
+  - heimdall-hello-sync-s3.sops.yaml
+  - heimdall-hello-sync-job.yaml
   - homebox-deployment.yaml
   - homebox-service.yaml
   - homebox-ingress.yaml
