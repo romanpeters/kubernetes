@@ -49,6 +49,11 @@ metadata:
     exposure: public
 spec:
   ingressClassName: traefik
+  tls:
+    - secretName: romanpeters-nl-tls
+      hosts:
+        - romanpeters.nl
+        - www.romanpeters.nl
   rules:
     - host: romanpeters.nl
       http:
