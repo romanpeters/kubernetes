@@ -40,6 +40,31 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /mnt/media
+        - name: init-speed-schedule
+          image: lscr.io/linuxserver/transmission:4.1.0-r0-ls329@sha256:29e631e2216f2d4a5e0f7274b3ef2045901efe1d13df78ef4d4d48e8a9f1b216
+          command:
+            - /bin/bash
+            - -ceu
+            - |
+              if [[ ! -f /config/settings.json ]]; then
+                cp /defaults/settings.json /config/settings.json
+              fi
+
+              jq -e '
+                .["alt-speed-enabled"] = true
+                | .["alt-speed-time-enabled"] = true
+                | .["alt-speed-time-day"] = 127
+                | .["alt-speed-time-begin"] = 540
+                | .["alt-speed-time-end"] = 0
+                | .["alt-speed-down"] = 2048
+                | .["alt-speed-up"] = 512
+                | .["speed-limit-down-enabled"] = false
+                | .["speed-limit-up-enabled"] = false
+              ' /config/settings.json >/config/settings.json.tmp
+              mv /config/settings.json.tmp /config/settings.json
+          volumeMounts:
+            - name: config
+              mountPath: /config
       containers:
         - name: gluetun
           image: qmcgaw/gluetun:v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab
