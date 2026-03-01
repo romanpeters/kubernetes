@@ -80,6 +80,8 @@ stages:
   boot.after:
     - name: restart-beszel-agent
       commands:
+        - getent passwd beszel >/dev/null || useradd --system --no-create-home --shell /usr/sbin/nologin beszel
         - systemctl daemon-reload
         - systemctl enable --now var-lib-rancher-k3s-agent-containerd.mount
+        - systemctl enable beszel-agent
         - systemctl restart beszel-agent
