@@ -83,13 +83,19 @@ data:
               summary: Pod OOMKilled
               description: Pod {{ $labels.namespace }}/{{ $labels.pod }} was OOMKilled.
           - alert: PodRestarting
-            expr: increase(kube_pod_container_status_restarts_total[10m]) > 0
-            for: 10m
+            expr: |
+              (
+                increase(kube_pod_container_status_restarts_total{container!="POD"}[15m]) >= 2
+                  and on(namespace,pod) (kube_pod_status_phase{phase="Running"} == 1)
+                  unless on(namespace,pod) (kube_pod_owner{owner_kind="Job"} == 1)
+              )
+                and on(namespace,pod) (time() - kube_pod_start_time > 1800)
+            for: 5m
             labels:
               severity: warning
             annotations:
               summary: Pod restarting
-              description: Pod {{ $labels.namespace }}/{{ $labels.pod }} restarted in the last 10 minutes.
+              description: Pod {{ $labels.namespace }}/{{ $labels.pod }} restarted at least twice in 15m (excluding Jobs and startup grace period).
           - alert: PodNotReady
             expr: |
               (kube_pod_status_ready{condition="true"} == 0)
