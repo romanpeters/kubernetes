@@ -19,6 +19,21 @@ spec:
         app.kubernetes.io/name: calibre-web
     spec:
       initContainers:
+        - name: cwa-settings
+          image: crocodilestick/calibre-web-automated:v4.0.6@sha256:c31a738b6d5ec6982c050063dd3f063b6943eb1051fc81144789f840d9093a8d
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              set -eu
+              if [ -f /config/cwa.db ]; then
+                sqlite3 /config/cwa.db "UPDATE cwa_settings SET auto_ingest_automerge='overwrite';"
+              fi
+          volumeMounts:
+            - name: config
+              mountPath: /config
         - name: patch-templates
           image: crocodilestick/calibre-web-automated:v4.0.6@sha256:c31a738b6d5ec6982c050063dd3f063b6943eb1051fc81144789f840d9093a8d
           imagePullPolicy: IfNotPresent
