@@ -81,7 +81,7 @@ spec:
             - name: OIDC_SIGNUP_ENABLED
               value: "true"
             - name: OIDC_PROVIDER_NAME
-              value: "authentik"
+              value: "R"
             - name: OIDC_AUTO_REDIRECT
               value: "false"
             - name: OIDC_SCOPES_OVERRIDE
