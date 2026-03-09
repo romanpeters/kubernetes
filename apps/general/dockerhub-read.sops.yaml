@@ -1,24 +1,24 @@
-apiVersion: ENC[AES256_GCM,data:C9k=,iv:nCmzQ8dX6XoxMSmDNpTWW0YP4bycbzukyVsrNqO9iE8=,tag:SPlz1M0l9B6+Z1wQ6iF/qw==,type:str]
+apiVersion: v1
 data:
-  .dockerconfigjson: ENC[AES256_GCM,data:RXXzky+mmG7p+0aO8XEtDhLP1pXutld4SPGlzkiFJeF4LBm3awt0Gj9BBY0c39O7jYUA5WNlQ+NrRzZIq95pJiqR2jRzOL/u8LbsrFkV6KCtdUJ6qNXa4Qeq8dcc6qN/1VlqBniQsk+yIbQAr6cejvHyGymWbG+9zHljTk0UoDpKDCi65c3Vn7qKfSHGtO/eoPHCwzasgGyj9SeyGeIE952pY1NokZtOSKy3td69OMOM1/GW7ntrAFT227rH8nKUk1kSnlt90C2Uq8Apy/WUQfsJJ9I0JnvciCwDo+ITSeLAj5VivzVbtFVK8PD7gZSeWTVhzBld5PdmNWYjsrAutg==,iv:zctKZ9zg42wcPmQDULm6b6X3+y8OZI4JNw8QrtT8kgk=,tag:ZdJ7H2TajLa0H28sRFaC5Q==,type:str]
-kind: ENC[AES256_GCM,data:skLb6C+F,iv:R51XTAnP3xMUuyBB5hhJBYcZC1zkR6YMSjdtQeNBI9U=,tag:TMrx4ThdMZsMmPqAlQi0Kw==,type:str]
+  .dockerconfigjson: ENC[AES256_GCM,data:woiUkbzLPJ2wW5bq2yvQ1ZobFdz4QN+BmOVls1QnrDYandSttCaUJHpbk+kTyudKbM+LzlDtKG9Yat0MGjL5/FhiWydhKKjUa/Ot519MTZ1lAUW4qZdoIBxEGg7MQ+fC5jEFecRi2+pBbByc7RhF2qpSiV6xXiaobWt8/d2cm9xoWhjA5YMJhRBX+zCIkcEA5xpegTXE2lANKe+dZzq01wHjSvMT2KQSBLo/VR7ji5Akj2Dah95lo3n7ljwS8zNfj4excIO7qcwGAhLFvEQwikaHkfXWB51HB+PHRCnQR3pfwzWmRuCPCe2DJ+BdDoMDu7zL8p7BV/2LUrNx14MLoA==,iv:pAvrU/TmLtHf5denZn2wygSP/ZfqVZ55ZSnChhCZDiU=,tag:4JbEUwF1kQ7ejy1kolq9Ww==,type:str]
+kind: Secret
 metadata:
   creationTimestamp: null
-  name: ENC[AES256_GCM,data:cEXmPEzpKZlGIvUzi4I=,iv:53Q3kDkjudQX83AhYFx+JhQwgG8YbxvKnZG2UAgrj38=,tag:wxm1Fq547g+cCzFpJ0hzgg==,type:str]
-  namespace: ENC[AES256_GCM,data:BOIDtFi63A==,iv:Xb10VP6HX8QOKCwoOXA6+gdUWUj2p3l6eaVUgmfonJM=,tag:SBggsljUJgYNLnSn7rqQcA==,type:str]
-type: ENC[AES256_GCM,data:aNP2wJNbhKCgnYxEJeeKfVUIPYPGJ3Q05liI6p9Y,iv:4XPoUjL4Xv/kgPq6UxTuyUZdXbdMR6nQFkEEXlQq/fA=,tag:Zlb7keglV72aODB8J6eqkw==,type:str]
+  name: dockerhub-read
+  namespace: general
+type: kubernetes.io/dockerconfigjson
 sops:
   age:
     - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2VWQ2VU5UeGxVcDB1Y3Ux
-        SzhETXVTeTMvejgybmV6YlNnb0xIMnNYM25RCjlBWjE0V2R4elN0d1FLTSsxbkw2
-        TnViN0dpZkhST21xN2xYZHlvYk9heEUKLS0tIGM2WXdXMVNudGtVMDhLQmlkRGU1
-        MWFhbjZkWVM4YVA5eXNDRlBOdGtRWjQKGeN8ylc7pvSewk++aVY6nqxlcPPTpj6w
-        KvSPPqBkb5ErmtJCpuxEm/pYD1yJ1g6ymuQU5tyAKQjuRZQxFRBMjw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBWZjdCeFFJRnBsM3N1NXlt
+        ZmhudmZXNnFxeFJUSml3bmYwWGd6SzNobHlRCmY1RGdHaUp6N2dXWEp5a01VVDNa
+        UmhJZmFqcGRqUHZkWjNYc29WeWRDUzQKLS0tIElwUUZlYUlGM0lrYTkrMmVoZ3l2
+        WG14S3laU2RzNk9tTHlBQjFROEhva2MKZQNna0sf7G4BAY9qAApZ4T/s7X+PCWYU
+        1VQ2S4V+zTt/2Fs5NZDZMJURH0Ol4JV0DiHHuITq+Qpyw/1U61KXmA==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-09T13:14:39Z"
-  mac: ENC[AES256_GCM,data:cCgIyWjyYQoWeblcDjWMMx//yWfx1nM1G2KMGDiGwup8GKclZx6dneL19jq1HstlG1vcstojmkL30M9gh+nmHw1guS7Pw1Xj/MAslfRKktxW9hL9cLl3u4kVSSSEH0jX+OceKFXR2wpn41Y7pI7dWSRGOU693Qly9tOIVVTFCd4=,iv:fg81enQIjMUds+53PnAqIckfrBfQxDmWi8wC6cKaSRU=,tag:/F/0OYx5hIgy6aaBef/hRg==,type:str]
-  unencrypted_suffix: _unencrypted
+  lastmodified: "2026-03-09T13:17:01Z"
+  mac: ENC[AES256_GCM,data:SYHTn5JwAyjuDFNOjoy3dze1zl6VHqzqvpcGYx9ThlvYFm0l57CSUoNE1p3ZitHiYSn29wf9RS4/ich5scF7CUmFHMeslvUha0DHUEC1ugYxt4idBXhCT9ONaHJURM0+PuQoqihXBrGD8pPkb6P4zhFvnmNCJ8Sq6SKdgQvVYrM=,iv:oPJpV5cOiqp4Bo7yFyMPd5xohh1zkuPgrNr4g+0o1M0=,tag:VpH5MW0FEx1KUyxidO+2Pg==,type:str]
+  encrypted_regex: ^(data|stringData)$
   version: 3.11.0
