@@ -148,9 +148,9 @@ data:
             siteMonitor: https://photos.romanpeters.nl
             siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
         - Mealie:
-            href: https://recipes.romanpeters.nl
+            href: https://recepten.romanpeters.nl
             icon: mealie
-            siteMonitor: https://recipes.romanpeters.nl
+            siteMonitor: https://recepten.romanpeters.nl
             siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
     - Automation:
         - Home Assistant:

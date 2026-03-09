@@ -15,7 +15,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: recipes.romanpeters.nl
+    - host: recepten.romanpeters.nl
       http:
         paths:
           - path: /
