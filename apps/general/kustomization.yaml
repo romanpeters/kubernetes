@@ -17,6 +17,7 @@ resources:
   - homebox-service.yaml
   - homebox-ingress.yaml
   - mealie-pvc.yaml
+  - mealie-secrets.sops.yaml
   - mealie-deployment.yaml
   - mealie-service.yaml
   - mealie-ingress.yaml
