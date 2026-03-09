@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mealie
+  namespace: general
+  labels:
+    app.kubernetes.io/name: mealie
+    app.kubernetes.io/instance: mealie-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: mealie
+  ports:
+    - name: http
+      port: 9000
+      targetPort: http

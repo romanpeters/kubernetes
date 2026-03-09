@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+  namespace: general
+  labels:
+    app.kubernetes.io/name: mealie
+    app.kubernetes.io/instance: mealie-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mealie
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mealie
+        app.kubernetes.io/instance: mealie-prod
+        app.kubernetes.io/part-of: homelab
+        app.kubernetes.io/managed-by: flux
+        exposure: public
+    spec:
+      containers:
+        - name: mealie
+          image: ghcr.io/mealie-recipes/mealie:v3.12.0@sha256:8d962f611390a1cca667eed32a29e9467e9c01c523e2db3ad00f667372067f9d
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 9000
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: BASE_URL
+              value: "https://recipes.romanpeters.nl"
+            - name: ALLOW_SIGNUP
+              value: "false"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mealie-data

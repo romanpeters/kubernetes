@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mealie
+  namespace: general
+  annotations:
+    external-dns: external
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure-int,websecure-pub
+  labels:
+    app.kubernetes.io/name: mealie
+    app.kubernetes.io/instance: mealie-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: public
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: recipes.romanpeters.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mealie
+                port:
+                  name: http
