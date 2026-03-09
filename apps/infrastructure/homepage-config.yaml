@@ -147,6 +147,11 @@ data:
             icon: immich
             siteMonitor: https://photos.romanpeters.nl
             siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
+        - Mealie:
+            href: https://recipes.romanpeters.nl
+            icon: mealie
+            siteMonitor: https://recipes.romanpeters.nl
+            siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
     - Automation:
         - Home Assistant:
             href: https://home.romanpeters.nl
