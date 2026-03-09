@@ -1,30 +1,30 @@
-apiVersion: ENC[AES256_GCM,data:aYo=,iv:vChGr9Fs4WKtDRnqRmCcVxJskiF2f89W+ibC0/C49XA=,tag:s4QiLfk4Ogbv8VF1ymLZag==,type:str]
-kind: ENC[AES256_GCM,data:G33afI1U,iv:QrjRnpMkcV/wQB5I9JEoFfOL1xF27EUmewLuKaz3wvg=,tag:JAZiu0wMgSW7+O40ejX5xw==,type:str]
+apiVersion: v1
+kind: Secret
 metadata:
-  name: ENC[AES256_GCM,data:gig2lXz1Fpb4zGgX8OxU4WwLXORzlw==,iv:C7nTQvS46/HWv59KTzpzBZff7JuHCd8j+tk2dmzhOng=,tag:E8oed8UkZbfSoLF/fvZ4kg==,type:str]
-  namespace: ENC[AES256_GCM,data:CT9ozL+huA==,iv:rOiMv4s2TBBjWHAC6qtyKhJLGxCMO8nlxNwQWEQ5mRI=,tag:P4AIuBOdgea/Z+BBULG1sA==,type:str]
+  name: heimdall-hello-sync-s3
+  namespace: general
   labels:
-    app.kubernetes.io/name: ENC[AES256_GCM,data:ePyMMRyj5Hp7RGsCOX6p4UMa7azo5A==,iv:ou0E5Mf92fFJXEhTby0bc7FCkaBrU0+BAlOdfmljaA8=,tag:laHLkIqRPDI9GQ2FygL9eA==,type:str]
-    app.kubernetes.io/instance: ENC[AES256_GCM,data:7F5bQD7+3S6J07gJOTu86Miw+WrouAtiaSPS,iv:5y8tpDe7EDSCn06iQgc7Jy9jvyxubBntQ42d0qmkcvg=,tag:qsJbsAG0Mn//r03MTAHjDw==,type:str]
-    app.kubernetes.io/part-of: ENC[AES256_GCM,data:eLG4PyD0hg==,iv:ULjX0jCzo1E0AGGAlCZT3Bj/6BIP0jYYr8eKxlngcSY=,tag:xD1+smyTVMZ8p+/HCDNPhg==,type:str]
-    app.kubernetes.io/managed-by: ENC[AES256_GCM,data:1+NquA==,iv:LEXA3Jywb7OzfBI8hKVrZvzzqY02+TC/BDBf2ZJHUw4=,tag:HSPfVF43FPvmvcdP9LhlxQ==,type:str]
-    exposure: ENC[AES256_GCM,data:DwEBqfHAHlc=,iv:j2G6C2tN2B+kMTcjKwqrKeDk0uabes2ntxkel/6e+y4=,tag:fVR0/zabP+ahNx43veTNKA==,type:str]
-type: ENC[AES256_GCM,data:dJIgVHrR,iv:7pLndnTiHRzuj3Ndj4SQjxLkOr+0gLJ2exxY61V+VC4=,tag:6vKmPIk56nqJb6sfV1Fzrw==,type:str]
+    app.kubernetes.io/name: heimdall-hello-sync-s3
+    app.kubernetes.io/instance: heimdall-hello-sync-s3-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+type: Opaque
 stringData:
-  access_key_id: ENC[AES256_GCM,data:IX0YesWD60HjX+3wHRTNdVz4BiR5upuwJgM=,iv:9rN0PZu0aYzX6aNuARmv+2Q7z1tvGJEIDSYObkD7CAY=,tag:vco77SZOLmrNIc5N9BW+Lw==,type:str]
-  secret_access_key: ENC[AES256_GCM,data:b+1AFP9/VXrT3nPlXlJ81bFyJ0qokWGV1L9bLEzE9PwqesE3gWIblYk2DdVBvec5gKkOj/70+1Hhrn23tameHA==,iv:etMrqGGxTCll7JxUEJoAIY2Jdmb9o82SvxWjbTsqVwE=,tag:RXxiETTbqyNYty2s7LKvxw==,type:str]
+  access_key_id: ENC[AES256_GCM,data:DfafUCDPGwHDrg1jzH3GdOcsa4CvaRUpzxw=,iv:xVkVsEzM2EOnJgs/sWnGB8OQDVR+J4aVoP0HYtgDXI0=,tag:TchM1wMool8iEiYHUftPEg==,type:str]
+  secret_access_key: ENC[AES256_GCM,data:jHe55TY796+cqNvfE7Vk5On/440hm3FKuYxHtgRvEkDLYVghwRG957VgBK9AtX3NOiWmLtdGif3Yf0udNLbqCg==,iv:hQrx27InnR5OVBD1eSqP9UtheDQCg55IJcuf5Y1345I=,tag:1ud3cAd/XhzzrKcY6R+bzg==,type:str]
 sops:
   age:
     - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
       enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwcVdXbmJ6eXg0a0RPNTJV
-        c2VnMnl5dWZsTlFadFcwY1FoanY2TTkvWkZzCjc3a1hFSzdXV2dqNXFuRUtpZllk
-        M3VKQW1GVzR3Rlc4Ryt6RWdNOUgza2sKLS0tIFpKQ0dxRGlpWnZQVWZlWldiVHBO
-        dU56K1NpUEpWS0ZWK2ZxeXczeWppbm8KrWg/DkzsgOZ+takzjMlkdTBal4A19ZEx
-        v/9e+agFcuud4fCIHsXD/eL0RUqAY6v/wIYV28PtSQmW2PlxycdpWA==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB3WnNtWXdMcFpUQ3N1SThP
+        WVoxelMyTFMxKzJQUGYxSDQxSVdybXpLeG5vClN5R2liTTV3Z1JDdFhncWhNWTI0
+        TExVandsM2JVbUNRMG1NTDUxNlA0Rk0KLS0tIGIxNVdFRFpvMERlUTlXaFlFSnBU
+        eVVqbWtKeXY2ZUFWSFJwa1VOcy83aTQKznKn7n3/SGWmPtfKoq/naDyi+mK58xWL
+        DsgxGkOZAqEWyKFonRgDwLFJH7BN769Ei2etaFNiylfJ+wRL7nUPqg==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-02-27T13:45:01Z"
-  mac: ENC[AES256_GCM,data:mkR/qv0eJDFs05a56JPkf5a0bYY4bOR+6DdACvda2J+me5dRZzciQPbIxf3z5RJwHniIfsKW1hrc74y8cL80NpbiD+eTwWmKh0iAI3nSaN3fkWoMgUF03zK9MZ1MtfSp8C+7E2pGtEOwwyRBOeR9FgTQ491jXlcvUuMeUq9IDjg=,iv:4N9QwAget/xprI7iZ7YjXfqvEs0XYAcGBH73XW/tgK8=,tag:PbJ9zOCxFGnRrnR3mqXmbw==,type:str]
-  unencrypted_suffix: _unencrypted
+  lastmodified: "2026-03-09T13:19:08Z"
+  mac: ENC[AES256_GCM,data:OgMfGz2wXlC58nBYyXMLFb3M3in55UJcw1p1mnPbIPOnLHOW5Q9WqyYenQdNCcqoq/hoUOhmUlQ/jRgk7Y6SJknVmGopWgbugSlrw8dcnXVt3R2fN1hofQtcMw22zQMLHDN6EslnSEpXfpOZBdw8EQ9i2MQNq07dU343mzZq5jw=,iv:XcUojkkTrJLUo9B2dtg+VYlKRTst+MTnoC2BQwwibMc=,tag:AoMS4DwnKmSPeSUKjkm3ug==,type:str]
+  encrypted_regex: ^(data|stringData)$
   version: 3.11.0
