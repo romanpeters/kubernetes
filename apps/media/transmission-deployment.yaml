@@ -84,18 +84,39 @@ spec:
             - name: TZ
               value: "Europe/Amsterdam"
             - name: VPN_SERVICE_PROVIDER
-              value: "protonvpn"
+              value: "custom"
             - name: VPN_TYPE
-              value: "openvpn"
-            - name: OPENVPN_USER
-              value: "6cZWPDe9RbkF4Mq7@proton.me"
-            - name: OPENVPN_PASSWORD
+              value: "wireguard"
+            - name: WIREGUARD_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: gluetun-openvpn
-                  key: OPENVPN_PASSWORD
-            - name: SERVER_COUNTRIES
-              value: "Romania"
+                  name: gluetun-wireguard
+                  key: WIREGUARD_PRIVATE_KEY
+            - name: WIREGUARD_ADDRESSES
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-wireguard
+                  key: WIREGUARD_ADDRESSES
+            - name: WIREGUARD_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-wireguard
+                  key: WIREGUARD_PUBLIC_KEY
+            - name: WIREGUARD_ENDPOINT_IP
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-wireguard
+                  key: WIREGUARD_ENDPOINT_IP
+            - name: WIREGUARD_ENDPOINT_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-wireguard
+                  key: WIREGUARD_ENDPOINT_PORT
+            - name: WIREGUARD_ALLOWED_IPS
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-wireguard
+                  key: WIREGUARD_ALLOWED_IPS
             - name: FIREWALL_INPUT_PORTS
               value: "9091"
             - name: FIREWALL_OUTBOUND_SUBNETS

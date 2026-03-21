@@ -31,7 +31,7 @@ resources:
   - prowlarr-ingress.yaml
   - flaresolverr-deployment.yaml
   - flaresolverr-service.yaml
-  - gluetun-openvpn.sops.yaml
+  - gluetun-wireguard.sops.yaml
   - searxng-deployment.yaml
   - searxng-service.yaml
   - searxng-ingress.yaml
