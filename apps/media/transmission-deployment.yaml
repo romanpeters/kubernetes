@@ -84,11 +84,11 @@ spec:
             - name: TZ
               value: "Europe/Amsterdam"
             - name: VPN_SERVICE_PROVIDER
-              value: "nordvpn"
+              value: "protonvpn"
             - name: VPN_TYPE
               value: "openvpn"
             - name: OPENVPN_USER
-              value: "Qf91ci2URG4bWVkjUHmDWsEE"
+              value: "6cZWPDe9RbkF4Mq7@proton.me"
             - name: OPENVPN_PASSWORD
               valueFrom:
                 secretKeyRef:

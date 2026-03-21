@@ -5,7 +5,7 @@ metadata:
   namespace: media
 type: Opaque
 stringData:
-  OPENVPN_PASSWORD: ENC[AES256_GCM,data:mQ4uleHgjlFnVt5bAXRxx04DcwfMfslF,iv:52GN2ucqJwkSI1N9diFPlgZv6gaqH7mVHIm4IakBM4k=,tag:IYz7EB+/oRu/RRmFA1jO4g==,type:str]
+  OPENVPN_PASSWORD: ENC[AES256_GCM,data:784WIoszdAetqQ8sAAYGZVu2s+k=,iv:UrFWOQTbkRlw/wFPD89PXzQdMsLmlerX1v33iePJ/gE=,tag:STxFAerDfnqSmoBiDM1RGA==,type:str]
 sops:
   age:
     - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
@@ -17,7 +17,7 @@ sops:
         Z08xZW5IL3F0M2FlMlRZaXZxcnQwcVUKeLzWXqIdU3gvRRQH6zysCTdOxPreear+
         kv6+P6xkaCzWTj13uhjBHy7PD3BBq2QSejYT5K68H7q7aWxY57yvDQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-02-08T14:46:45Z"
-  mac: ENC[AES256_GCM,data:yxpcnf1dsu6b5MdZB65/0jCcESnV9IrewHfrvozJuy9XiEHrAukQZee5Km4PvS+YU+MDTIcPc0XC+KQvcAeHqfprwD0h6sN6Hs2mbPwDQnzzd95+fRKcBMI1FfkuGTQ9xLp4T3lnUoUN5276ay4NG49iAPbxXTPkmJUFeKcnU8w=,iv:sTg79Nhi8WTx5JAX2Z6royYmfSK6kPNzlcWbYXcgpfA=,tag:VY+ZrCg2uIB6jS3Ux4a4qw==,type:str]
+  lastmodified: "2026-03-21T17:20:47Z"
+  mac: ENC[AES256_GCM,data:tGyEmRvszmwbFzwMzfk5udNFtwrdOgNVZbtHzBzMzRN5cXnIkVUVs/6kVFS0HVKji46hSOO6HVl9m3EUQetEAkpJnS1SPAJj5M8uT8/Ym6Lmd45f38/mw1axLP6Izg3hPOaPg5EOeCsEPAb5A1uYpxgIfqMNUJO2m5WJJpJ24aU=,iv:g1nFWTqddyDvNh4AYQWKtYH8tF8MqSyTabJ6kR6wnUI=,tag:6TOtEeEBTNWZXNnj2Iyf9Q==,type:str]
   encrypted_regex: ^(data|stringData)$
   version: 3.11.0
