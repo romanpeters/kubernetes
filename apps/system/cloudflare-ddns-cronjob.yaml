@@ -1,0 +1,60 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cloudflare-ddns
+  namespace: external-dns
+  labels:
+    app.kubernetes.io/name: cloudflare-ddns
+    app.kubernetes.io/instance: cloudflare-ddns-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+    app.kubernetes.io/component: dns
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: cloudflare-ddns
+            app.kubernetes.io/instance: cloudflare-ddns-prod
+            app.kubernetes.io/part-of: homelab
+            app.kubernetes.io/managed-by: flux
+            exposure: internal
+            app.kubernetes.io/component: dns
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: cloudflare-ddns
+              image: python:3.12.12-alpine3.22@sha256:848ba4413eb897e225159b8fc1b02094576cbae4aa73fc13142608ae2c8c0e32
+              imagePullPolicy: IfNotPresent
+              command:
+                - python
+                - /scripts/ddns.py
+              env:
+                - name: CF_API_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: external-dns
+                      key: CF_API_TOKEN
+                - name: CF_ZONE_NAME
+                  value: "romanpeters.nl"
+                - name: CF_RECORD_NAME
+                  value: "edge.romanpeters.nl"
+                - name: CF_TTL
+                  value: "1"
+                - name: CF_PROXIED
+                  value: "true"
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+          volumes:
+            - name: script
+              configMap:
+                name: cloudflare-ddns
+                defaultMode: 0755

@@ -13,6 +13,8 @@ resources:
   - external-dns-rbac.yaml
   - external-dns.sops.yaml
   - external-dns-deployment.yaml
+  - cloudflare-ddns-configmap.yaml
+  - cloudflare-ddns-cronjob.yaml
   - external-dns-resourcequota.yaml
   - external-dns-limitrange.yaml
   - traefik-helmchartconfig.yaml
