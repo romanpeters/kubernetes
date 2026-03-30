@@ -12,9 +12,9 @@ metadata:
     app.kubernetes.io/component: dns
 type: Opaque
 stringData:
-  EDGE_HOSTNAME: ENC[AES256_GCM,data:rY5oRmXeCOYkpNf7xP06U+r/d+4XCfNv3jsSHPs=,iv:Y3RBq9n1HWDd7QBGpM0oBGROGZTyJo7p0T4uMdKlkEM=,tag:iS/hXfwOpolBUgzeypcd+w==,type:str]
+  EDGE_HOSTNAME: ENC[AES256_GCM,data:dFNAU0FJqHA1aVYo8cTl3iHgmQ==,iv:BYzt/cOA6xE+kHlKOW6R9eVwzvW0Sxc30x4aWzmaovM=,tag:YT+tthrxxqIiei5+KKRWgg==,type:str]
 data:
-  EDGE_HOSTNAME: ENC[AES256_GCM,data:Yugg3yXOBNDHB45eQ3cPw7yMqiUCyCnvHkravMAL5hAyKHH1xRDvQA==,iv:TtR9bP4d6oJ3US7LW021e/iW3bGwQVleSZBZS/G9rjc=,tag:qOpragTYl24gMszPMHNLhA==,type:str]
+  EDGE_HOSTNAME: ENC[AES256_GCM,data:7jC60xGwIpd1T3yQXJIe1qM6MbmJt1OwwOUpWQ==,iv:uRukLYsxex0mBBwl7oGRvl9KCPBjyMTt8ILmCqn4210=,tag:WLF8eevMuR/PjsJrtmAYnA==,type:str]
 sops:
   age:
     - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
@@ -26,7 +26,7 @@ sops:
         Q3BhN2pKUzh0NTk0ZFdGUzU4ZzUwVnMKrGpEVnAZ/Qs/1fmEqB3PYzTtpJGWbRQo
         TFsTBaIe+jwE2KollBMgLCzqOrLZlWKthxlFs2SvIqnogUk94RbgUQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-30T18:08:50Z"
-  mac: ENC[AES256_GCM,data:6zfEBaurxyTncM2qptFFn4rQUSg1rhjYfIKxwiqcZlUVy5Xbl//YNCm7yFq86W41mgrUDZ2xTmNUv/U6lqzWFSCEKsvj8UzSw7ZM0WiyBUPlBLUPY5ojKW0GgryIyaewpIi/rsWtc0WclF0C7ldD/jEgng8/jIWZSFH1iwLIOpo=,iv:79hKaS8vLcbQApAs60cceiRaZ/dpO2xf8iap+s2yvew=,tag:+qjQ0Ofd89wAeYqmliBrpA==,type:str]
+  lastmodified: "2026-03-30T18:35:02Z"
+  mac: ENC[AES256_GCM,data:KmyKBiKu3KB1i4OEkRYZnkXbJnBv5OMlfrtJW+1UFfeYpqKLlRiixALrk+gwuEWt34YkaHZRdupKfzvmmG0H+Y3pwleKeE8V8aYwfbhA8+uUg3dpt01skgb3s4XUm7odfbDhNfF1pVre+e3TAfawr5AGzENXa+8VVYVjM+0O6dE=,iv:qUEO5lpfVIWjCr6y/r7QpBNO47BF88GqMGCxgOWdZnY=,tag:J9RS68AyqX/XwqLIqYtSWA==,type:str]
   encrypted_regex: ^(data|stringData)$
   version: 3.11.0
