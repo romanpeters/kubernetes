@@ -31,6 +31,8 @@ resources:
   - prowlarr-ingress.yaml
   - flaresolverr-deployment.yaml
   - flaresolverr-service.yaml
+  - isponsorblocktv-config.sops.yaml
+  - isponsorblocktv-deployment.yaml
   - gluetun-wireguard.sops.yaml
   - searxng-deployment.yaml
   - searxng-service.yaml
