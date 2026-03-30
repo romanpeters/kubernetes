@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: n8n
-          image: n8nio/n8n:2.8.3@sha256:53004142b0e93de1e9e31943e601ed9bd4b24ca82a307864ccadf1820b627e5e
+          image: n8nio/n8n:2.15.0@sha256:5ff0ad333090d1901005cd764399b1be2c2a29b816704107f08c340d0d223043
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

@@ -37,7 +37,7 @@ spec:
               mountPath: /config
       containers:
         - name: s3-sync
-          image: public.ecr.aws/aws-cli/aws-cli:2.31.2@sha256:67428f5a530cc8aa415da6d86f3da69ded9f8f764e3a6df3c8bf36585827299e
+          image: public.ecr.aws/aws-cli/aws-cli:2.34.20@sha256:c31df1feddfaecb76e0c5340a8eec9ad83802cccb7661a14c2e0ef5b82984297
           command:
             - /bin/sh
             - -ceu

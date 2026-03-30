@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: karma
-          image: ghcr.io/prymitive/karma:v0.122@sha256:87312daa8b8ca740e2acd427fc996724f8c69e36b9f0ad15c1961c1e4ccb1987
+          image: ghcr.io/prymitive/karma:v0.128@sha256:cae0afb8d083756a7a44413480847fa59c072659d909734924a10640e1de600d
           args:
             - "--alertmanager.uri=http://alertmanager.monitoring.svc.cluster.local:9093"
             - "--listen.address=0.0.0.0"

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: pgvector/pgvector:0.8.1-pg16-trixie@sha256:1e4956185a7fd9306a41ee759a7b4329c4faf9a2bb91a1d01437310c97002433
+          image: pgvector/pgvector:0.8.2-pg16-trixie@sha256:fc843a8547e0e4e84337a585aef2a28621db9e9f2fd1aaf8e72fedb04d19b40d
           imagePullPolicy: IfNotPresent
           ports:
             - name: postgres

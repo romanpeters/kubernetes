@@ -23,7 +23,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: autoheal
-              image: python:3.12.12-alpine3.22@sha256:848ba4413eb897e225159b8fc1b02094576cbae4aa73fc13142608ae2c8c0e32
+              image: python:3.14.3-alpine3.22@sha256:b0d9cd5ed77285b2563c86ca10b53578249ca1a08d14e5b69b7970884a9fb539
               imagePullPolicy: IfNotPresent
               command:
                 - python

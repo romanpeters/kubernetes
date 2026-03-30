@@ -25,7 +25,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: configarr
-              image: ghcr.io/raydak-labs/configarr:1.20.0@sha256:40180ae49ed3caab864f65682da14b172281edb19924e60a5fd357b2234cb987
+              image: ghcr.io/raydak-labs/configarr:1.25.0@sha256:bf2a3bb33e67dc09669af4ef614d12fbbe28cffb6bd6358cd69ea49665cac917
               imagePullPolicy: IfNotPresent
               volumeMounts:
                 - name: config

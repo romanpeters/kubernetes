@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: beszel
-          image: henrygd/beszel:0.18.3@sha256:d1326b5cd73838b1d1acc5f1764c4b993c9668aa26df149082695894cb2805ae
+          image: henrygd/beszel:0.18.6@sha256:3135185161e072a5058f7c05b247345072bd9f3e23a4a9cd8c879880b085bc41
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
