@@ -11,7 +11,7 @@ metadata:
     exposure: internal
     app.kubernetes.io/component: dns
   annotations:
-    description: "Updates edge.romanpeters.nl A record to current public IP"
+    description: "Updates a hidden Cloudflare A record to the current public IP"
 data:
   ddns.py: |
     #!/usr/bin/env python3
@@ -26,7 +26,10 @@ data:
       sys.exit(1)
 
     zone_name = os.environ.get("CF_ZONE_NAME", "romanpeters.nl")
-    record_name = os.environ.get("CF_RECORD_NAME", "edge.romanpeters.nl")
+    record_name = os.environ.get("CF_RECORD_NAME")
+    if not record_name:
+      print("CF_RECORD_NAME missing", file=sys.stderr)
+      sys.exit(1)
     proxied = os.environ.get("CF_PROXIED", "true").lower() == "true"
     ttl = int(os.environ.get("CF_TTL", "1"))
 
