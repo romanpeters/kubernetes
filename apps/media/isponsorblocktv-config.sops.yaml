@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: isponsorblocktv-config
+  namespace: media
+  labels:
+    app.kubernetes.io/name: isponsorblocktv-config
+    app.kubernetes.io/instance: isponsorblocktv-config-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+type: Opaque
+stringData:
+  config.json: ENC[AES256_GCM,data:sDLKYkQ5lmqQ463FHRiByIxNCsB4pPUJ9tJKNRkxkbbb5F4hKr5vST2Mhrpp6RiFxFbpf1ENVdaMuoxBur9pBuoK0nOx8vl74w8UDFz1Ejwh8+BJ2EqHjCqCJwwSvAZabHndkS2dnZ4GV1VXKIkXd56/NvIS51AO4cmzC3nXF/Gxg8u2V8yuGdrx7eV4i1wr5l/PU+ZNUWsSY2NI0SNTxxhfoziYHX+R+RTJBMinqPbVCgIpkxBZq5xdAXEGjnzgDR+Z/YaePmHayWrjHp87ogZPFwp5R/KyowM0yVLjFJmwtcm71+WGELKK27RITLipWM2QzWj3whLsgS1B4coDeqe7622/FEK5RjDI8R3dNf+WvsF7VuV524seZpQpBvBqS0nCYbqosVrz3cMMrdaHm4tGa9wtE0FEdMxoZQtlXNvGrURAmL8CM36Pnp58yetvqYb9Z5x5q+kg9Zivebdtq+fuLCB1erImYczk+GaUdZyyBo4sqwSdCnEjYMVCjKLE96uU/uSZlGnQe7UyprA9e7jgRiMX7AvqJJjbA9VYBz7xPcke67c1887heoFG6qRXLFyDMGPOMgbmztuAigrZwhVHGvyL86wwO/UD1/xFUfCKTLZdANv+M/C2cJ4N1bDGTH8RYS0+MeVmRpzCE3zqUxa3OoGvHHRccS4d76eQL5mxxIV31XrXz3U19+60d3sAmLl5M7AEm8vlpPmfqXL/XkA3sDLkuqEKYbFUU5BWGkZMv2GDcFxu75zdOyVRTlmcHekTMg==,iv:4wuVRN6QPNoVFJ4NiPd0nnw3BlrGFTTaN/GidOF67HM=,tag:9aDHfMBZasFH1trvCtLHSQ==,type:str]
+sops:
+  age:
+    - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHdlZkeExwUnFMQm0vYXBw
+        T0MxTTQvQllDSVFCMkRNcjlRcVM4eHV6OXk0CnJwVVJjZFMrKzFVSU9JSmlMT2Vz
+        TU1rWmtqWkFEcmZtWnBTamdMWmp4Uk0KLS0tIE9QTGEvNTN2dEdQSFViMzFGN2oz
+        M0xaWENGbXFtVjViVEtYYlh3NVNMOWsKB4XOq4NOv1hcKNeJAAOFAqgz6MjXPdpd
+        SQzSToQqDFnsIzTQ7cEP3QjBCw+BETAdex2iKBaSGcCwphZnMeVZiQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2026-03-30T19:23:32Z"
+  mac: ENC[AES256_GCM,data:rq19IzZ0prLCz/5+hhkwT1UnOrD2r59ZR5/SyQ0JpoSCMsqGiOUo8hFLvImImGM9K1vCHevSMyk6xyAAYMj6wU539z5VsVIMJnSZOlfxYjNiPNF62U/t8c88x5tbxG76i9t4l0qSIaF/01FVgl2lPDN0i+XtHkxnWFVU0HdTfTY=,iv:dmgmnzTMysDTj4IaVdlv1Yo846j7hD24GTSRQrghCYc=,tag:8RBwNgI27JDGFYzu2LMKvg==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.11.0
