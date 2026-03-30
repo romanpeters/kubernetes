@@ -52,7 +52,7 @@ spec:
                 - name: CF_TTL
                   value: "1"
                 - name: CF_PROXIED
-                  value: "true"
+                  value: "false"
               volumeMounts:
                 - name: script
                   mountPath: /scripts
