@@ -20,12 +20,23 @@ spec:
         app.kubernetes.io/name: external-dns
     spec:
       serviceAccountName: external-dns
+      initContainers:
+        - name: busybox
+          image: busybox:1.37@sha256:b3255e7dfbcd10cb367af0d409747d511aeb66dfac98cf30e97e87e4207dd76f
+          command:
+            - /bin/sh
+            - -c
+            - cp /bin/busybox /tools/busybox
+          volumeMounts:
+            - name: tools
+              mountPath: /tools
       containers:
         - name: external-dns
           image: registry.k8s.io/external-dns/external-dns:v0.20.0@sha256:ddc7f4212ed09a21024deb1f470a05240837712e74e4b9f6d1f2632ff10672e7
           imagePullPolicy: IfNotPresent
           command:
-            - /bin/sh
+            - /tools/busybox
+            - sh
             - -c
             - /scripts/run.sh
           env:
@@ -43,8 +54,12 @@ spec:
             - name: runner
               mountPath: /scripts
               readOnly: true
+            - name: tools
+              mountPath: /tools
       volumes:
         - name: runner
           configMap:
             name: external-dns-runner
             defaultMode: 0755
+        - name: tools
+          emptyDir: {}
