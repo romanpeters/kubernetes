@@ -14,7 +14,7 @@ type: Opaque
 stringData:
   EDGE_HOSTNAME: ENC[AES256_GCM,data:Byf4mpEHB3LBltQFJFSXP3wld3M8RhlMnfOtYu0=,iv:tINxmemnvGbpaphA+M/2dDJ0HYJESfQ5ZQcPY0My//w=,tag:TAHJ0yJfCGRsc+Nwa2zkrw==,type:str]
 data:
-  EDGE_HOSTNAME: ENC[AES256_GCM,data:VH10Qe9DasZRm9LO2slylzRE3H7Y/hLO67BEUjI=,iv:8/4u6h8JFgIfMvozUzRyLNUOrQNBBI2Is5UGjzlDvxo=,tag:FCwFEqfwqlg7fjruQeWnjg==,type:str]
+  EDGE_HOSTNAME: ENC[AES256_GCM,data:Yugg3yXOBNDHB45eQ3cPw7yMqiUCyCnvHkravMAL5hAyKHH1xRDvQA==,iv:TtR9bP4d6oJ3US7LW021e/iW3bGwQVleSZBZS/G9rjc=,tag:qOpragTYl24gMszPMHNLhA==,type:str]
 sops:
   age:
     - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
@@ -26,7 +26,7 @@ sops:
         Q3BhN2pKUzh0NTk0ZFdGUzU4ZzUwVnMKrGpEVnAZ/Qs/1fmEqB3PYzTtpJGWbRQo
         TFsTBaIe+jwE2KollBMgLCzqOrLZlWKthxlFs2SvIqnogUk94RbgUQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-30T18:00:05Z"
-  mac: ENC[AES256_GCM,data:GlnayoZjqp0bLhLkowPxI12y7oxM4VJ9lVyP42N2pB2HG8VXkOmuonYmh41IPAEK0lnDc2aIwOeb5e6z2oJBrJ4g5vTJhkzehg28mlqZ2IWCPDs+218NEYFnLedGVpsuVoJA2mJJNuizOSWE/ZXZyNMReXPUDe63qv0D9LT2W9Y=,iv:TjpuqDkZ3swoLzUD8QuZfpy4UCOOI6R22V2YEU/4QWQ=,tag:R4iczWtIw6LyJO5ljsgllw==,type:str]
+  lastmodified: "2026-03-30T18:01:52Z"
+  mac: ENC[AES256_GCM,data:dFUATZl7ZTghnMHnfXtQ/XU6ogkDZYNvZP5DOIg7BtvR7vg00XvdXErTmnURGC8mHqxPLqNPuTGz/HsY91VlawR/xcDY1pOjn2yGof6XRmMrnEuPovGBUHkTtJltMt53hglbeuI8KmFfTK43Q3eG2M1Wwd08yxuNUd4WhuE8FMo=,iv:TjfpBN7XaqmBQ8b/nFftbpeivoE3Ru0dIraRWjdZZMg=,tag:nCp6xfFVD+V1QZZTM9ImbA==,type:str]
   encrypted_regex: ^(data|stringData)$
   version: 3.11.0
