@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: external-dns-runner
+  namespace: external-dns
+  labels:
+    app.kubernetes.io/name: external-dns
+    app.kubernetes.io/instance: external-dns-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+    app.kubernetes.io/component: dns
+data:
+  run.sh: |
+    #!/bin/sh
+    set -eu
+
+    if [ -z "${EDGE_HOSTNAME:-}" ]; then
+      echo "EDGE_HOSTNAME is required" >&2
+      exit 1
+    fi
+
+    exec /bin/external-dns \
+      --source=ingress \
+      --source=traefik-proxy \
+      --provider=cloudflare \
+      --domain-filter=romanpeters.nl \
+      --annotation-filter=external-dns=external \
+      --registry=txt \
+      --txt-owner-id=romanpeters-k3s \
+      --txt-prefix=external-dns- \
+      --policy=sync \
+      --cloudflare-proxied \
+      --default-targets="${EDGE_HOSTNAME}" \
+      --force-default-targets \
+      --interval=1m \
+      --log-level=info

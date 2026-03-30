@@ -11,8 +11,10 @@ resources:
   - cilium-l2announcementpolicy.yaml
   - external-dns-namespace.yaml
   - external-dns-rbac.yaml
+  - cloudflare-ddns.sops.yaml
   - external-dns.sops.yaml
   - external-dns-deployment.yaml
+  - external-dns-runner-configmap.yaml
   - cloudflare-ddns-configmap.yaml
   - cloudflare-ddns-cronjob.yaml
   - external-dns-resourcequota.yaml

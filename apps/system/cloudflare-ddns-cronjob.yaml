@@ -45,7 +45,10 @@ spec:
                 - name: CF_ZONE_NAME
                   value: "romanpeters.nl"
                 - name: CF_RECORD_NAME
-                  value: "edge.romanpeters.nl"
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflare-ddns
+                      key: EDGE_HOSTNAME
                 - name: CF_TTL
                   value: "1"
                 - name: CF_PROXIED

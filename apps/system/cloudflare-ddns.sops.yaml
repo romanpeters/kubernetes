@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-ddns
+  namespace: external-dns
+  labels:
+    app.kubernetes.io/name: cloudflare-ddns
+    app.kubernetes.io/instance: cloudflare-ddns-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+    app.kubernetes.io/component: dns
+type: Opaque
+stringData:
+  EDGE_HOSTNAME: ENC[AES256_GCM,data:Byf4mpEHB3LBltQFJFSXP3wld3M8RhlMnfOtYu0=,iv:tINxmemnvGbpaphA+M/2dDJ0HYJESfQ5ZQcPY0My//w=,tag:TAHJ0yJfCGRsc+Nwa2zkrw==,type:str]
+sops:
+  age:
+    - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZUy9jZmRxTUpzMjdjeHZy
+        Tithd2J5TEVsZDRKRjRSbkU5NEZGZlZVckRRCjJyUW1mNDZ0dWpUcHZUZ05nRG11
+        MjRxYVo3dy8weWlOZzhWemh5THdta3cKLS0tIDJkMVpUQUdUTFMwcHBQV2JtOVRC
+        Q3BhN2pKUzh0NTk0ZFdGUzU4ZzUwVnMKrGpEVnAZ/Qs/1fmEqB3PYzTtpJGWbRQo
+        TFsTBaIe+jwE2KollBMgLCzqOrLZlWKthxlFs2SvIqnogUk94RbgUQ==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2026-03-30T17:29:19Z"
+  mac: ENC[AES256_GCM,data:b5S3WsRzuxUwJWy7MCwRAQGyt6WHMrPCVMKLoBuW/NOX6IvaMOPxCMI7NIh9dNs4/h5chQVVzgX5pwIDAhJH8ooVpKwDm6B/4iDU4u1Tndk2MnPB8rUfcgpK30dVeLooqqYfljHNzpSmGrYTGPNm15fDC4jaxmiEVSxXv7HsDwk=,iv:p6U55lHk9SjW4jpJkKOCyEq3u3RqQ6xmMYswRFRsBNI=,tag:lOsIgHDjhuZJMOBCn6vaVw==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.11.0
