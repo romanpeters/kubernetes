@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/component: dns
 type: Opaque
 stringData:
-  EDGE_HOSTNAME: ENC[AES256_GCM,data:Byf4mpEHB3LBltQFJFSXP3wld3M8RhlMnfOtYu0=,iv:tINxmemnvGbpaphA+M/2dDJ0HYJESfQ5ZQcPY0My//w=,tag:TAHJ0yJfCGRsc+Nwa2zkrw==,type:str]
+  EDGE_HOSTNAME: ENC[AES256_GCM,data:rY5oRmXeCOYkpNf7xP06U+r/d+4XCfNv3jsSHPs=,iv:Y3RBq9n1HWDd7QBGpM0oBGROGZTyJo7p0T4uMdKlkEM=,tag:iS/hXfwOpolBUgzeypcd+w==,type:str]
 data:
   EDGE_HOSTNAME: ENC[AES256_GCM,data:Yugg3yXOBNDHB45eQ3cPw7yMqiUCyCnvHkravMAL5hAyKHH1xRDvQA==,iv:TtR9bP4d6oJ3US7LW021e/iW3bGwQVleSZBZS/G9rjc=,tag:qOpragTYl24gMszPMHNLhA==,type:str]
 sops:
@@ -26,7 +26,7 @@ sops:
         Q3BhN2pKUzh0NTk0ZFdGUzU4ZzUwVnMKrGpEVnAZ/Qs/1fmEqB3PYzTtpJGWbRQo
         TFsTBaIe+jwE2KollBMgLCzqOrLZlWKthxlFs2SvIqnogUk94RbgUQ==
         -----END AGE ENCRYPTED FILE-----
-  lastmodified: "2026-03-30T18:01:52Z"
-  mac: ENC[AES256_GCM,data:dFUATZl7ZTghnMHnfXtQ/XU6ogkDZYNvZP5DOIg7BtvR7vg00XvdXErTmnURGC8mHqxPLqNPuTGz/HsY91VlawR/xcDY1pOjn2yGof6XRmMrnEuPovGBUHkTtJltMt53hglbeuI8KmFfTK43Q3eG2M1Wwd08yxuNUd4WhuE8FMo=,iv:TjfpBN7XaqmBQ8b/nFftbpeivoE3Ru0dIraRWjdZZMg=,tag:nCp6xfFVD+V1QZZTM9ImbA==,type:str]
+  lastmodified: "2026-03-30T18:08:50Z"
+  mac: ENC[AES256_GCM,data:6zfEBaurxyTncM2qptFFn4rQUSg1rhjYfIKxwiqcZlUVy5Xbl//YNCm7yFq86W41mgrUDZ2xTmNUv/U6lqzWFSCEKsvj8UzSw7ZM0WiyBUPlBLUPY5ojKW0GgryIyaewpIi/rsWtc0WclF0C7ldD/jEgng8/jIWZSFH1iwLIOpo=,iv:79hKaS8vLcbQApAs60cceiRaZ/dpO2xf8iap+s2yvew=,tag:+qjQ0Ofd89wAeYqmliBrpA==,type:str]
   encrypted_regex: ^(data|stringData)$
   version: 3.11.0
