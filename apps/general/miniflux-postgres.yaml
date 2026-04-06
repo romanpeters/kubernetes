@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux-postgres
+  labels:
+    app.kubernetes.io/name: miniflux-postgres
+    app.kubernetes.io/instance: miniflux-postgres-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: miniflux-postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: miniflux-postgres
+        app.kubernetes.io/instance: miniflux-postgres-prod
+        app.kubernetes.io/part-of: homelab
+        app.kubernetes.io/managed-by: flux
+        exposure: internal
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:17.9-alpine3.23@sha256:6f30057d31f5861b66f3545d4821f987aacf1dd920765f0acadea0c58ff975b1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: postgres
+              containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: miniflux
+            - name: POSTGRES_USER
+              value: miniflux
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: miniflux-secrets
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: miniflux-postgres-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: miniflux-postgres
+  labels:
+    app.kubernetes.io/name: miniflux-postgres
+    app.kubernetes.io/instance: miniflux-postgres-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  selector:
+    app.kubernetes.io/name: miniflux-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: postgres

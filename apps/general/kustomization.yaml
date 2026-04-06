@@ -21,6 +21,12 @@ resources:
   - mealie-deployment.yaml
   - mealie-service.yaml
   - mealie-ingress.yaml
+  - miniflux-secrets.sops.yaml
+  - miniflux-postgres-pvc.yaml
+  - miniflux-postgres.yaml
+  - miniflux-deployment.yaml
+  - miniflux-service.yaml
+  - miniflux-ingress.yaml
   - openwebui-bootstrap-config.yaml
   - openwebui-mcp.sops.yaml
   - openwebui-pvc.yaml
