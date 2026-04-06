@@ -69,6 +69,8 @@ spec:
               value: "https://rss.romanpeters.nl/oauth2/oidc/callback"
             - name: OAUTH2_OIDC_DISCOVERY_ENDPOINT
               value: "https://auth.romanpeters.nl/application/o/miniflux/"
+            - name: OAUTH2_OIDC_PROVIDER_NAME
+              value: "R"
             - name: OAUTH2_USER_CREATION
               value: "1"
           resources:
