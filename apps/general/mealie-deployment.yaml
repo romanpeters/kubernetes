@@ -89,7 +89,7 @@ spec:
             - name: OIDC_USER_CLAIM
               value: "preferred_username"
             - name: OIDC_NAME_CLAIM
-              value: "name"
+              value: "preferred_username"
             - name: OIDC_GROUPS_CLAIM
               value: "groups"
             - name: OIDC_CONFIGURATION_URL
