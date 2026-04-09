@@ -33,7 +33,7 @@ resources:
   - flaresolverr-service.yaml
   - isponsorblocktv-config.sops.yaml
   - isponsorblocktv-deployment.yaml
-  - gluetun-wireguard.sops.yaml
+  - gluetun-nordvpn.sops.yaml
   - searxng-deployment.yaml
   - searxng-service.yaml
   - searxng-ingress.yaml

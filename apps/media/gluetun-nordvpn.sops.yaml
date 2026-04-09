@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gluetun-nordvpn
+  namespace: media
+  labels:
+    app.kubernetes.io/name: gluetun-nordvpn
+    app.kubernetes.io/instance: gluetun-nordvpn-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+type: Opaque
+stringData:
+  OPENVPN_USER: ENC[AES256_GCM,data:8r8Gf9+zElq0VtQ40sqhvS6lurctig==,iv:d0NQCzhUtpZZ5ZCdG+GiGeTAJJFkFgzRHTEZvIDZHBI=,tag:ZJ8S2xPLyTpJrMnkaeyxag==,type:str]
+  OPENVPN_PASSWORD: ENC[AES256_GCM,data:Ay6sJLKiBsROCfLB2Aq1QRvTHX8=,iv:Q6nFyalZTnnVBLnbM+NpmNzsO49X8sdhglKR/cmjEqg=,tag:Gnob8ILaj7HVgu2JXD6N+A==,type:str]
+sops:
+  age:
+    - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+      enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxWXpKRWdHOVltdFRRcHNl
+        NHZJY1h2NW1haWRLSWhkdUVwVFE3T1l0ZmljClFneE9nOW9OUFhqaTN4eXdYVjNE
+        SFU3TTZjK2VRbGkySFBJSTQrZHV3VTgKLS0tIHdWaFJkRzRpb21vUmZPS1Z3TEtp
+        ZEhORXhEOG1WbkFsaTM1VmIzamtZMWsKi8N8SnmBtrzBh3BL3CL5s0TXgyZqTIWb
+        BvRygbGgOrO/MFqwhc+e7SU6pHhr7aGv/V2zEP4ZLeW/dGdg+spKKA==
+        -----END AGE ENCRYPTED FILE-----
+  lastmodified: "2026-04-09T18:52:37Z"
+  mac: ENC[AES256_GCM,data:hiQU5zaYmtHvSRZH1mHb43ckh8T2xcaH/z9JKIJJSE2aJSmFEVThKHCY+9BApHZpX1YWrjTfiIpKY8K1v+cc9w+7zh1SnuE2LpPa75WRMZmWJTEjjxy9sg1rbeyuDMnknSrA7/B0zSJyLMnlEdW5xoEMpFxxxkwdMhQEiZfFCTk=,iv:hOpo69ko4IaeS3mDu96kDZtu14jhDDSC0+scYHc/aCg=,tag:Qdu9dQthSXh6LDHVn/4u+g==,type:str]
+  encrypted_regex: ^(data|stringData)$
+  version: 3.12.2

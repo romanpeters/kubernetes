@@ -84,39 +84,19 @@ spec:
             - name: TZ
               value: "Europe/Amsterdam"
             - name: VPN_SERVICE_PROVIDER
-              value: "custom"
+              value: "nordvpn"
             - name: VPN_TYPE
-              value: "wireguard"
-            - name: WIREGUARD_PRIVATE_KEY
+              value: "openvpn"
+            - name: OPENVPN_USER
               valueFrom:
                 secretKeyRef:
-                  name: gluetun-wireguard
-                  key: WIREGUARD_PRIVATE_KEY
-            - name: WIREGUARD_ADDRESSES
+                  name: gluetun-nordvpn
+                  key: OPENVPN_USER
+            - name: OPENVPN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: gluetun-wireguard
-                  key: WIREGUARD_ADDRESSES
-            - name: WIREGUARD_PUBLIC_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: gluetun-wireguard
-                  key: WIREGUARD_PUBLIC_KEY
-            - name: WIREGUARD_ENDPOINT_IP
-              valueFrom:
-                secretKeyRef:
-                  name: gluetun-wireguard
-                  key: WIREGUARD_ENDPOINT_IP
-            - name: WIREGUARD_ENDPOINT_PORT
-              valueFrom:
-                secretKeyRef:
-                  name: gluetun-wireguard
-                  key: WIREGUARD_ENDPOINT_PORT
-            - name: WIREGUARD_ALLOWED_IPS
-              valueFrom:
-                secretKeyRef:
-                  name: gluetun-wireguard
-                  key: WIREGUARD_ALLOWED_IPS
+                  name: gluetun-nordvpn
+                  key: OPENVPN_PASSWORD
             - name: FIREWALL_INPUT_PORTS
               value: "9091"
             - name: FIREWALL_OUTBOUND_SUBNETS
