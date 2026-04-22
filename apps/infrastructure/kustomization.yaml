@@ -18,7 +18,6 @@ resources:
   - garage-service.yaml
   - garage-ingress.yaml
   - garage-web-ingress.yaml
-  - garage-web-hello-ingress.yaml
   - garage-web-code-ingress.yaml
   - garage-web-code-honden-auth-ingress.yaml
   - garage-webui-deployment.yaml
@@ -44,4 +43,3 @@ resources:
   - resourcequota.yaml
   - limitrange.yaml
   - networkpolicy.yaml
-  - networkpolicy-garage-s3-from-general.yaml
