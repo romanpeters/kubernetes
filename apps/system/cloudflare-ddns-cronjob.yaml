@@ -44,15 +44,10 @@ spec:
                       key: CF_API_TOKEN
                 - name: CF_ZONE_NAME
                   value: "romanpeters.nl"
-                - name: CF_RECORD_NAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: cloudflare-ddns
-                      key: EDGE_HOSTNAME
+                - name: CF_RECORDS
+                  value: "edge.romanpeters.nl:false,romanpeters.nl:true"
                 - name: CF_TTL
                   value: "1"
-                - name: CF_PROXIED
-                  value: "false"
               volumeMounts:
                 - name: script
                   mountPath: /scripts
