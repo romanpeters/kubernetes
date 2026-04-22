@@ -30,11 +30,14 @@ spec:
               if [ -d /config/www ]; then
                 cp -a /config/www/. /work/site/
               fi
+              cp -L /theme/index.html /work/site/index.html
           volumeMounts:
             - name: work
               mountPath: /work
             - name: config
               mountPath: /config
+            - name: homepage
+              mountPath: /theme
       containers:
         - name: s3-sync
           image: public.ecr.aws/aws-cli/aws-cli:2.31.2@sha256:67428f5a530cc8aa415da6d86f3da69ded9f8f764e3a6df3c8bf36585827299e
@@ -67,3 +70,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: heimdall-config
+        - name: homepage
+          configMap:
+            name: heimdall-hello-homepage
