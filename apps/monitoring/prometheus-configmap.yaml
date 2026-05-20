@@ -75,13 +75,21 @@ data:
               summary: Pod image pull failed
               description: Pod {{ $labels.namespace }}/{{ $labels.pod }} has ImagePullBackOff.
           - alert: PodOOMKilled
-            expr: max_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[5m]) >= 1
-            for: 0m
+            expr: |
+              (
+                increase(kube_pod_container_status_restarts_total{container!="POD"}[15m]) >= 1
+              )
+                and on(namespace,pod,container,uid)
+              (
+                kube_pod_container_status_last_terminated_reason{reason="OOMKilled"} == 1
+              )
+                unless on(namespace,pod) (kube_pod_owner{owner_kind="Job"} == 1)
+            for: 5m
             labels:
               severity: warning
             annotations:
               summary: Pod OOMKilled
-              description: Pod {{ $labels.namespace }}/{{ $labels.pod }} was OOMKilled.
+              description: Pod {{ $labels.namespace }}/{{ $labels.pod }} was OOMKilled and restarted recently.
           - alert: PodRestarting
             expr: |
               (

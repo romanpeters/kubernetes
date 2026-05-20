@@ -20,7 +20,9 @@ data:
     import urllib.request
     from datetime import datetime, timedelta, timezone
 
-    WATCH_REASONS = {"CrashLoopBackOff", "ImagePullBackOff", "ErrImagePull"}
+    # Autoheal is useful for crash loops, but restarting workloads cannot fix
+    # broken image references and only creates more noisy failing pods.
+    WATCH_REASONS = {"CrashLoopBackOff"}
     EXCLUDED_NAMESPACES = {
       "kube-system",
       "kube-public",
