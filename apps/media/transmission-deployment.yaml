@@ -97,6 +97,8 @@ spec:
                 secretKeyRef:
                   name: gluetun-nordvpn
                   key: OPENVPN_PASSWORD
+            - name: SERVER_COUNTRIES
+              value: "Albania"
             - name: FIREWALL_INPUT_PORTS
               value: "9091"
             - name: FIREWALL_OUTBOUND_SUBNETS
