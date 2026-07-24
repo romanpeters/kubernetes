@@ -20,6 +20,9 @@ resources:
   - radarr-deployment.yaml
   - radarr-service.yaml
   - radarr-ingress.yaml
+  - lidarr-deployment.yaml
+  - lidarr-service.yaml
+  - lidarr-ingress.yaml
   - overseerr-deployment.yaml
   - overseerr-service.yaml
   - overseerr-ingress.yaml

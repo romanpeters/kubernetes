@@ -63,6 +63,7 @@ flowchart TB
         immich["Immich"]
         sonarr["Sonarr"]
         radarr["Radarr"]
+        lidarr["Lidarr"]
         bazarr["Bazarr"]
         prowlarr["Prowlarr"]
         transmission["Transmission"]
@@ -118,4 +119,5 @@ flowchart TB
   traefik --> proxmox
   traefik --> unifi
   traefik --> unas
+  traefik --> lidarr
 ```
