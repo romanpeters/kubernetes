@@ -38,6 +38,15 @@ spec:
               value: "America/New_York"
             - name: PORT
               value: "11011"
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 250m
+              ephemeral-storage: 500Mi
+            requests:
+              memory: 128Mi
+              cpu: 100m
+              ephemeral-storage: 250Mi
           volumeMounts:
             - name: config
               mountPath: /config

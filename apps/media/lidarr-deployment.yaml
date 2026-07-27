@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: lidarr
-          image: lscr.io/linuxserver/lidarr:latest
+          image: lscr.io/linuxserver/lidarr:2.4.0@sha256:1a33c967d3a8f7150ac61f7e2664b954277192242d82b7de71482735e1875444
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
