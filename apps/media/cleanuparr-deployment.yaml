@@ -18,6 +18,10 @@ spec:
       labels:
         app.kubernetes.io/name: cleanuparr
     spec:
+      tolerations:
+        - key: "node.kubernetes.io/disk-pressure"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - name: cleanuparr
           image: ghcr.io/cleanuparr/cleanuparr:2.6.4@sha256:025010f9f3f58b8bdbcdf4c5e577cd1697c5938bf29722659aac8f52033c375a
