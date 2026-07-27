@@ -18,6 +18,10 @@ spec:
       labels:
         app.kubernetes.io/name: heimdall
     spec:
+      tolerations:
+        - key: "node.kubernetes.io/unschedulable"
+          operator: "Exists"
+          effect: "NoSchedule"
       containers:
         - name: heimdall
           image: lscr.io/linuxserver/heimdall:v2.7.6-ls337@sha256:adb467b90b825f44d7e4c1764191f4fa0a7c38cff6ff050407f7aeb3514bdbe1
