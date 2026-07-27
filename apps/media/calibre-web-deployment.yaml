@@ -66,11 +66,11 @@ spec:
             limits:
               memory: 512Mi
               cpu: 500m
-              ephemeral-storage: 1Gi
+              ephemeral-storage: 500Mi
             requests:
               memory: 256Mi
               cpu: 200m
-              ephemeral-storage: 500Mi
+              ephemeral-storage: 250Mi
           volumeMounts:
             - name: templates
               mountPath: /app/calibre-web-automated/cps/templates

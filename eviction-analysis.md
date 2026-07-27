@@ -19,14 +19,19 @@ The cluster is experiencing persistent eviction issues with cleanuparr and calib
    ```yaml
    resources:
      limits:
-       ephemeral-storage: "5Gi"
+       ephemeral-storage: "500Mi"
      requests:
-       ephemeral-storage: "2Gi"
+       ephemeral-storage: "250Mi"
    ```
 
-2. Monitor disk usage with `kubectl top nodes` and set up alerts
+2. Monitor disk usage with `kubectl top nodes` and set up alerts for ephemeral storage
 
 3. Implement log rotation or retention policies for applications in media namespace
+
+## Implementation Plan (GitOps Compliant)
+1. Add monitoring to detect ephemeral storage usage by pods
+2. Create cleanup processes scheduled via CronJobs
+3. Set up alerting with the monitoring stack for storage pressure
 
 ## Commands to execute immediately:
 kubectl delete pod -n media <evicted-pod-name>

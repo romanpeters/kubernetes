@@ -3,3 +3,4 @@ age.key
 *.log
 .DS_Store
 k3s-cluster-private
+.aider*

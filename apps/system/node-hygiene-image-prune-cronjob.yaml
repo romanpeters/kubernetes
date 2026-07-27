@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: flux
     exposure: internal
 spec:
-  schedule: "40 3 * * *"
+  schedule: "*/30 * * * *" # Run every 30 minutes to be more aggressive with cleanup
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 2

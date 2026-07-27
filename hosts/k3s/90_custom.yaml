@@ -1,10 +1,10 @@
-#cloud-config
+# cloud-config
 
 # Sources:
-# - reader
-# - reader
-# - reader
-# - cmdline
+#  - reader
+#  - reader
+#  - reader
+#  - cmdline
 
 install:
   auto: true
