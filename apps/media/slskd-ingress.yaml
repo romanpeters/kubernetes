@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: slskd
+  namespace: media
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure-int
+  labels:
+    app.kubernetes.io/name: slskd
+    app.kubernetes.io/instance: slskd-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: soulseek.romanpeters.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: slskd
+                port:
+                  name: http

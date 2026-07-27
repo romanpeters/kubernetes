@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slskd
+  labels:
+    app.kubernetes.io/name: slskd
+    app.kubernetes.io/instance: slskd-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: slskd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: slskd
+    spec:
+      initContainers:
+        - name: init-config
+          image: busybox:1.37@sha256:b3255e7dfbcd10cb367af0d409747d511aeb66dfac98cf30e97e87e4207dd76f
+          command:
+            - /bin/sh
+            - -c
+            - mkdir -p /config/app
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+      containers:
+        - name: gluetun
+          image: qmcgaw/gluetun:v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: VPN_SERVICE_PROVIDER
+              value: "nordvpn"
+            - name: VPN_TYPE
+              value: "openvpn"
+            - name: OPENVPN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-nordvpn
+                  key: OPENVPN_USER
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-nordvpn
+                  key: OPENVPN_PASSWORD
+            - name: SERVER_COUNTRIES
+              value: "Albania"
+            - name: FIREWALL_INPUT_PORTS
+              value: "5030,5031,50300"
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "10.0.0.0/8,10.42.0.0/16,10.43.0.0/16"
+          volumeMounts:
+            - name: tun
+              mountPath: /dev/net/tun
+        - name: slskd
+          image: slskd/slskd:latest@sha256:ecd4026d49574e8f8c13de8956a3c8b6a8c20f9337071859ab08a2d452d815e6
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          ports:
+            - name: http
+              containerPort: 5030
+            - name: https
+              containerPort: 5031
+            - name: soulseek
+              containerPort: 50300
+          env:
+            - name: SLSKD_REMOTE_CONFIGURATION
+              value: "true"
+          volumeMounts:
+            - name: config
+              mountPath: /app
+            - name: media
+              mountPath: /mnt/media/downloads
+              subPath: downloads
+      volumes:
+        - name: tun
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
+        - name: config
+          persistentVolumeClaim:
+            claimName: slskd-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-nfs

@@ -64,6 +64,9 @@ resources:
   - immich-server.yaml
   - audiobookshelf-redirect.yaml
   - immich-redirect.yaml
+  - slskd-deployment.yaml
+  - slskd-service.yaml
+  - slskd-ingress.yaml
   - resourcequota.yaml
   - limitrange.yaml
   - networkpolicy.yaml
