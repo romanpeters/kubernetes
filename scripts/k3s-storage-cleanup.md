@@ -5,7 +5,19 @@ This file contains configurations to help with storage cleanup in K3s clusters t
 ## Purpose
 To configure cleanup procedures that automate routine maintenance tasks that prevent pods from being evicted due to ephemeral storage exhaustion.
 
-## Automated Cleanup Jobs
+## Storage Management Recommendations
+
+### Resource Limits for Applications
+Applications should have proper resource limits set, particularly for ephemeral storage. The current cleanuparr setup includes:
+```yaml
+resources:
+  limits:
+    ephemeral-storage: 300Mi
+```
+
+For applications that might consume more storage during operation, consider increasing the limit to 1-2GB based on actual usage.
+
+### Automated Cleanup Jobs
 
 ### Cleanup Script for Container Runtime
 ```yaml

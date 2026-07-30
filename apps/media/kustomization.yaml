@@ -14,6 +14,7 @@ resources:
   - cleanuparr-deployment.yaml
   - cleanuparr-service.yaml
   - cleanuparr-ingress.yaml
+  - cleanuparr-cleanup-job.yaml
   - sonarr-deployment.yaml
   - sonarr-service.yaml
   - sonarr-ingress.yaml

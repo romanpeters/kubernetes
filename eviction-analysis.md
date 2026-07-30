@@ -28,9 +28,18 @@ The cluster is experiencing persistent eviction issues with cleanuparr and calib
 
 3. Implement log rotation or retention policies for applications in media namespace
 
+4. Set up automated cleanup processes via CronJobs to prevent future accumulation of unused containers/images (see k3s-storage-cleanup.md)
+
+## Storage Management Best Practices
+Applications in the cluster should have appropriate resource limits set, especially for ephemeral storage. This ensures pods don't consume all available ephemeral storage space and helps prevent eviction.
+
+For resources that may need more space based on their nature:
+- cleanuparr: Currently 300Mi limit (this may need to be increased per usage patterns)
+- calibre-web: Should have proper limits set as well
+
 ## Implementation Plan (GitOps Compliant)
 1. Add monitoring to detect ephemeral storage usage by pods
-2. Create cleanup processes scheduled via CronJobs
+2. Create cleanup processes scheduled via CronJobs (automated cleanup jobs already defined in k3s-storage-cleanup.md)
 3. Set up alerting with the monitoring stack for storage pressure
 
 ## Commands to execute immediately:

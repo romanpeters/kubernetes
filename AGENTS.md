@@ -45,6 +45,7 @@ Regular maintenance tasks:
 - Review and update secrets in SOPS
 - Monitor cluster health
 - Update application configurations as needed
+- Run commands on the KairOS host using 'ssh k3s'
 
 ## Development
 
