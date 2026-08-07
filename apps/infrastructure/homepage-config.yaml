@@ -220,11 +220,7 @@ data:
             icon: prowlarr
             siteMonitor: https://prowlarr.romanpeters.nl
             siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
-        - Cleanuparr:
-            href: https://cleanuparr.romanpeters.nl
-            icon: cleanuparr
-            siteMonitor: https://cleanuparr.romanpeters.nl
-            siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
+
     - Infrastructure:
         - Traefik:
             href: https://traefik.romanpeters.nl
