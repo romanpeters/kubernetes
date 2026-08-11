@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: slskd-soulseek
+  namespace: media
+  labels:
+    app.kubernetes.io/name: slskd-soulseek
+    app.kubernetes.io/instance: slskd-soulseek-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+type: Opaque
+stringData:
+  SOULSEEK_USERNAME: ENC[AES256_GCM,data:zhpnFrBEzADjLAA=,iv:OKrVTGoVz2L8jN0TEhVT3xCwKX5efSQlH5mzNFiCtKU=,tag:OuqpYCk1Kud+Uaxx/qpqyA==,type:str]
+  SOULSEEK_PASSWORD: ENC[AES256_GCM,data:PRSjWccXoA6gAqqj1CrBhVsMTOo=,iv:5KAo1IMBt5dGA3/rBQ+r2DLzq3g/TWhYerW+ZVTlA9Y=,tag:zgKPVIJTH3wzIB7qqXTKhg==,type:str]
+sops:
+  age:
+    - enc: |
+        -----BEGIN AGE ENCRYPTED FILE-----
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwc3MrZkJacEx1cEZqZ3l6
+        NmlhK0ZxdCs1S28yTEE4aDhyTUp5VnRrZUdZCmdtVkQ0K214M0tYcmhkL2tiTzkx
+        aURFV0ZucThXMUpYOXdvb20yN2pUN0EKLS0tIEpkVnRYYmNPdlFGQ1lZS1UvR1JD
+        blBxN2tLMm1ReDdiUjl3ZkZ3Smgyc1UKJ5JESif8bQRv8v0q9Cek6MOf4dUJUQu/
+        qeUR7NxV6eqORoj/g2bILYvqvGf/xQPzO8iGdoeBc7Nf55XIRv797Q==
+        -----END AGE ENCRYPTED FILE-----
+      recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+  encrypted_regex: ^(data|stringData)$
+  lastmodified: "2026-08-12T09:27:12Z"
+  mac: ENC[AES256_GCM,data:bbLc08vEoDb7r9V1XGOtXFr7xzo6hcq8jxOkfKtW7MkRNwjtMAfGNKBa0kn7d0rtHaH4HHmUVpA51AEd6LN+5f0kkuNW+CSDdg65/dm2Lf85DU1qhUWt2atw4mMrn5A91Br1w5gkQMIGXkOs5GikFw19rTbkmp8Q5CQ5I9VLTe4=,iv:RNN0MBPPGny5Yre7Acc/a3t2GfW8e2LIthWIcByvhsA=,tag:+FEMumy2g9kHPZBCOUGcKA==,type:str]
+  version: 3.13.3

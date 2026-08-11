@@ -101,6 +101,16 @@ spec:
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
+            - name: SOULSEEK_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: slskd-soulseek
+                  key: SOULSEEK_USERNAME
+            - name: SOULSEEK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: slskd-soulseek
+                  key: SOULSEEK_PASSWORD
           volumeMounts:
             - name: config
               mountPath: /app
