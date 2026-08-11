@@ -82,7 +82,7 @@ spec:
             - name: tun
               mountPath: /dev/net/tun
         - name: slskd
-          image: slskd/slskd:2.4.0@sha256:f7c8a9901e18f234689b70012435287512f986871a1531015531b1221527213f
+          image: slskd/slskd:0.9.9@sha256:607410724a11d2695f57d190c00d883c1859ec127b501a44bd895a153dd5028f
           imagePullPolicy: IfNotPresent
           resources:
             requests:
