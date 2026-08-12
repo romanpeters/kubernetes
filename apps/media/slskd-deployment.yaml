@@ -101,12 +101,12 @@ spec:
           env:
             - name: SLSKD_REMOTE_CONFIGURATION
               value: "true"
-            - name: SOULSEEK_USERNAME
+            - name: SLSKD_SLSK_USERNAME
               valueFrom:
                 secretKeyRef:
                   name: slskd-soulseek
                   key: SOULSEEK_USERNAME
-            - name: SOULSEEK_PASSWORD
+            - name: SLSKD_SLSK_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: slskd-soulseek
