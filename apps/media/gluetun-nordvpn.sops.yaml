@@ -1,30 +1,30 @@
-apiVersion: ENC[AES256_GCM,data:tBM=,iv:zYXZ/LBTopdjcJ78R9pXjmltID65FweOQY4JLAMAYQI=,tag:sn6c4KMCItb4aKFYb9yLBA==,type:str]
-kind: ENC[AES256_GCM,data:t8JO8SNy,iv:1ZmoTx4cnvtmluXoAE7DecOvlH/a+OTl+ix213jL8Qg=,tag:g2Xe5p28d5EsJVBkoUuEgw==,type:str]
+apiVersion: v1
+kind: Secret
 metadata:
-  name: ENC[AES256_GCM,data:E6gqEYBzTCiaQcTdnkUS,iv:Ivan96wvLmaMnd6BzBXTuVqPKinFsltjaI6J4im0UcU=,tag:dnzG+WGOk9fu+CiI6qahkA==,type:str]
-  namespace: ENC[AES256_GCM,data:FNZGylM=,iv:2RsBxW673xleISHGdN1Hu2WyPZBsgNT3jD2oiXXLdyo=,tag:ctf6esiBpwHWMqfRyC6xWw==,type:str]
+  name: gluetun-nordvpn
+  namespace: media
   labels:
-    app.kubernetes.io/name: ENC[AES256_GCM,data:r4DSu1YyOkQF8mU4lh69,iv:iOSlun2+6f2MAmRZHeU1FKIZ407e6ozR4/gnJKyHDME=,tag:cKMndp+FSYuYRXfe1VmRPA==,type:str]
-    app.kubernetes.io/instance: ENC[AES256_GCM,data:GsiaSUVeVKvdCaVAUBrlwUGmI+k=,iv:aYRXdm1cyRbCOeu99Q3rFQumib3/LV2YaARL9wrzRRQ=,tag:Qu9B8pHNeD+7T1vuxRVqfg==,type:str]
-    app.kubernetes.io/part-of: ENC[AES256_GCM,data:SWVKLNcKIg==,iv:GmFNxzDJzB1HIui1HgQTz0XhoWJCdCAZtA9pAuEoN+Y=,tag:akSMbSGMOEnYqhiXPCWJTA==,type:str]
-    app.kubernetes.io/managed-by: ENC[AES256_GCM,data:8S+zTg==,iv:sAtEgCFyu8+t421ZVP0uYIVog+OyNoIg3/VLJrIOxO4=,tag:RJmU0B6vBEQ4rIN2DLI2og==,type:str]
-    exposure: ENC[AES256_GCM,data:hi0fiOjKxFs=,iv:b/n38eWStMU7UeECpuAvDnWl24yUziCpjO9SaAzlVcg=,tag:PeACScQCU/qY+ktxdKtuoQ==,type:str]
-type: ENC[AES256_GCM,data:zQE5yg/s,iv:rxV8Obbvxh9aJ8usM3D2abQgvAM70dYIrH64HWsYBLQ=,tag:/0J4ZlsVyy0MihyW/WICjw==,type:str]
+    app.kubernetes.io/name: gluetun-nordvpn
+    app.kubernetes.io/instance: gluetun-nordvpn-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+type: Opaque
 stringData:
-  OPENVPN_USER: ENC[AES256_GCM,data:l4OYLdODVSRbCy23rbdRTCpJsdz4btiO,iv:C9L58erRs4fcpODM1aPlX8RnA0uJY+u6v80uC91AWWk=,tag:zTwgQuQiEoTv4hKWTmAvRw==,type:str]
-  OPENVPN_PASSWORD: ENC[AES256_GCM,data:+1fCc0nt9SZY9y/EJ3PiZAeJ7BE1xAs9,iv:zh0OWXk7egRvnksaqMCqZDb/zR2UpzXq7fZv4qqdQGg=,tag:c9j08WtqZxq/yvONEzRNAA==,type:str]
+  OPENVPN_USER: ENC[AES256_GCM,data:vj6Op2/W0TqdNDUEYJDSyZsVYbnYQSf1,iv:nZteFK2GXPPAIbrkmcTwdl+6aHPxszp6v5e9mLi426c=,tag:PiE064P1ss3yXE61XhHgqA==,type:str]
+  OPENVPN_PASSWORD: ENC[AES256_GCM,data:U6Gh43Dk0Q2ha1e2SdgckwiAna/Wlr3H,iv:TG5JAVuyuwn3XY9dBYzLfitbMnxK2KMKONzFZ2Al1Wg=,tag:J5C0NGlP9ftHejO4gyuwdw==,type:str]
 sops:
   age:
     - enc: |
         -----BEGIN AGE ENCRYPTED FILE-----
-        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBEOUQ2YlNCL2g2OERXNjRn
-        K29DY0hhYVF5NjF6Y1ZQRHFvdDBYaVpiQmdrCld6LzF0bUhLbDJPUDhvaEdzZmdS
-        MndkV0hRNFVIRDNTSCsrMngxZFJGMnMKLS0tIGh6dnNDbTV0ZGhWRklLOVFYYkJ0
-        VFNpMFdaTW53VFlwN29MUm5iUEtnZEEKCLyCAyDzfVZdunNctqs5YRZnzr5EotDA
-        wdneJ+P9uX8478PToywlBmpMn4e1CvLrI+srR5Qv44bQ0rWttkswxw==
+        YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVa1k1MTBmSzZWNGtHUG0w
+        L2tWN3lqMlFPQml0aXlxamIrdW80bTZUL0NBCjAvV2Q0T2lTVGFCUVAzV2ovb2dJ
+        TXl6eTMwRHlWOUFKaUVpOUZLaUhjUnMKLS0tIHA5YkcrNXlCWDFwUFlKSVVxODVM
+        SVUvNzBmYk1zcFdjaE5sOGtYUU9GRDgK1RRLhP/7bFyW6yoB0+0Fz5VUjI/qo8WV
+        NP+74u1O0t/hpnvgqfQR2+0wv8ubqFfsp9E0B6WU25cf8ZclC4JaEw==
         -----END AGE ENCRYPTED FILE-----
       recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
-  lastmodified: "2026-08-12T20:51:57Z"
-  mac: ENC[AES256_GCM,data:CIvtCvandFkkdGSytljCFBRgKyO76uqlJ5jNpMGRattOdAY/OFp87uegHod+5iYKvDAeOzJ2235OQe/SO4MRyJmXhCpUIkj5FDjnc44LEdmJNH2uKdbh0pAzbaF3BAJVpom/xpTDisWm7EnP2ax/eQaoWBgvn4eCEZ4W9Oncysc=,iv:6pXIxHDYOO2CfCqbQIh26fUQjVjsfGUN5KaxuI9q2xg=,tag:vPwdFp72KyYfSBeAye9aGA==,type:str]
-  unencrypted_suffix: _unencrypted
+  encrypted_regex: ^(data|stringData)$
+  lastmodified: "2026-08-15T11:01:59Z"
+  mac: ENC[AES256_GCM,data:EGCdMNfqQ+IdBAZSsxfBDWy8CGa8wxGrWihhOPo4YWAFalHiNrDyukHXyxCga0Is45/Oa3TNc+eqdadeH6R2LY7kb8WLQoskgaVOI/Uy1jjz2psY+A4nzUWM0DlYeC96GbEAr5gATU04orTzhHF3pjnlAjeAa++McJZXm5wYMD4=,iv:C8Gt1gULjy9BykDxcklfC2NKbVuorrixJcHYz5j39Uc=,tag:MV0i1pZ4bpJwQXMbKADdiw==,type:str]
   version: 3.13.3
