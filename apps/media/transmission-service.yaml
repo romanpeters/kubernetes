@@ -11,8 +11,8 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: transmission
+    app.kubernetes.io/name: media-vpn
   ports:
     - name: http
       port: 9091
-      targetPort: http
+      targetPort: 9091

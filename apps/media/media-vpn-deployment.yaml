@@ -1,0 +1,259 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-vpn
+  labels:
+    app.kubernetes.io/name: media-vpn
+    app.kubernetes.io/instance: media-vpn-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: media-vpn
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: media-vpn
+        app.kubernetes.io/instance: media-vpn-prod
+        app.kubernetes.io/part-of: homelab
+        app.kubernetes.io/managed-by: flux
+        exposure: internal
+    spec:
+      initContainers:
+        - name: init-slskd-config
+          image: busybox:1.37@sha256:b3255e7dfbcd10cb367af0d409747d511aeb66dfac98cf30e97e87e4207dd76f
+          command:
+            - /bin/sh
+            - -c
+            - mkdir -p /config/app
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          volumeMounts:
+            - name: slskd-config-vol
+              mountPath: /config
+        - name: init-searxng-settings
+          image: docker.io/searxng/searxng:2026.2.16-8e824017d@sha256:60055af6f2f1ca14b488d9c0f47a019d1dbaf15b4f6547a7194253bf2ab94744
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              cp /usr/local/searxng/searx/settings.yml /config/settings.yml
+              sed -i "s/ultrasecretkey/$(head -c 24 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')/g" /config/settings.yml
+              if ! grep -q '^      - json$' /config/settings.yml; then
+                sed -i '/^  formats:$/a\      - json' /config/settings.yml
+              fi
+              echo "enabled json format in searxng settings"
+          volumeMounts:
+            - name: searxng-config
+              mountPath: /config
+        - name: init-downloads
+          image: busybox:1.37@sha256:b3255e7dfbcd10cb367af0d409747d511aeb66dfac98cf30e97e87e4207dd76f
+          command:
+            - /bin/sh
+            - -c
+            - mkdir -p /mnt/media/downloads/complete /mnt/media/downloads/incomplete /mnt/media/downloads/watch
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          volumeMounts:
+            - name: media
+              mountPath: /mnt/media
+        - name: init-speed-schedule
+          image: lscr.io/linuxserver/transmission:4.1.0-r0-ls329@sha256:29e631e2216f2d4a5e0f7274b3ef2045901efe1d13df78ef4d4d48e8a9f1b216
+          command:
+            - /bin/bash
+            - -ceu
+            - |
+              if [[ ! -f /config/settings.json ]]; then
+                cp /defaults/settings.json /config/settings.json
+              fi
+
+              jq -e '
+                  .["alt-speed-enabled"] = true
+                  | .["alt-speed-time-enabled"] = true
+                  | .["alt-speed-time-day"] = 127
+                  | .["alt-speed-time-begin"] = 540
+                  | .["alt-speed-time-end"] = 0
+                  | .["alt-speed-down"] = 2048
+                  | .["alt-speed-up"] = 512
+                  | .["speed-limit-down-enabled"] = false
+                  | .["speed-limit-up-enabled"] = false
+                ' /config/settings.json >/config/settings.json.tmp
+              mv /config/settings.json.tmp /config/settings.json
+          volumeMounts:
+            - name: transmission-config
+              mountPath: /config
+      containers:
+        - name: gluetun
+          image: qmcgaw/gluetun:v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: VPN_SERVICE_PROVIDER
+              value: "nordvpn"
+            - name: VPN_TYPE
+              value: "openvpn"
+            - name: OPENVPN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-nordvpn
+                  key: OPENVPN_USER
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-nordvpn
+                  key: OPENVPN_PASSWORD
+            - name: SERVER_COUNTRIES
+              value: "Albania"
+            - name: FIREWALL_INPUT_PORTS
+              value: "5030,5031,50300,8080,9091"
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "10.0.0.0/8,10.42.0.0/16,10.43.0.0/16"
+          volumeMounts:
+            - name: tun
+              mountPath: /dev/net/tun
+        - name: slskd
+          image: slskd/slskd:0.9.9@sha256:607410724a11d2695f57d190c00d883c1859ec127b501a44bd895a153dd5028f
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          ports:
+            - name: slskd-http
+              containerPort: 5030
+            - name: slskd-https
+              containerPort: 5031
+            - name: slskd-soulseek
+              containerPort: 50300
+          env:
+            - name: SLSKD_REMOTE_CONFIGURATION
+              value: "true"
+            - name: SLSKD_SLSK_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: slskd-soulseek
+                  key: SOULSEEK_USERNAME
+            - name: SLSKD_SLSK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: slskd-soulseek
+                  key: SOULSEEK_PASSWORD
+          volumeMounts:
+            - name: slskd-config-vol
+              mountPath: /app
+            - name: media
+              mountPath: /mnt/media/downloads
+              subPath: downloads
+        - name: searxng
+          image: docker.io/searxng/searxng:2026.2.16-8e824017d@sha256:60055af6f2f1ca14b488d9c0f47a019d1dbaf15b4f6547a7194253bf2ab94744
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: BASE_URL
+              value: "https://search.romanpeters.nl/"
+            - name: INSTANCE_NAME
+              value: "Roman Search"
+            - name: SEARXNG_SETTINGS_PATH
+              value: "/etc/searxng/settings.yml"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          volumeMounts:
+            - name: searxng-config
+              mountPath: /etc/searxng
+        - name: transmission
+          image: lscr.io/linuxserver/transmission:4.1.0-r0-ls329@sha256:29e631e2216f2d4a5e0f7274b3ef2045901efe1d13df78ef4d4d48e8a9f1b216
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          ports:
+            - name: http
+              containerPort: 9091
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Amsterdam"
+          volumeMounts:
+            - name: transmission-config
+              mountPath: /config
+            - name: media
+              mountPath: /mnt/media/downloads
+              subPath: downloads
+      volumes:
+        - name: tun
+          hostPath:
+            path: /dev/net/tun
+            type: CharDevice
+        - name: slskd-config-vol
+          persistentVolumeClaim:
+            claimName: slskd-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-nfs
+        - name: searxng-config
+          emptyDir: {}
+        - name: transmission-config
+          persistentVolumeClaim:
+            claimName: transmission-config

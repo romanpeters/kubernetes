@@ -10,10 +10,10 @@ metadata:
     exposure: internal
 spec:
   selector:
-    app.kubernetes.io/name: slskd
+    app.kubernetes.io/name: media-vpn
   ports:
     - name: http
       port: 5030
-      targetPort: http
+      targetPort: 5030
       protocol: TCP
   type: ClusterIP

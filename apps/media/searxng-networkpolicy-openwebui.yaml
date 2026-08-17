@@ -12,7 +12,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: searxng
+      app.kubernetes.io/name: media-vpn
   policyTypes:
     - Ingress
   ingress:

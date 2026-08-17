@@ -34,10 +34,9 @@ resources:
   - isponsorblocktv-config.sops.yaml
   - isponsorblocktv-deployment.yaml
   - gluetun-nordvpn.sops.yaml
-  - searxng-deployment.yaml
+  - media-vpn-deployment.yaml
   - searxng-service.yaml
   - searxng-ingress.yaml
-  - transmission-deployment.yaml
   - transmission-service.yaml
   - transmission-ingress.yaml
   - searxng-networkpolicy-openwebui.yaml
@@ -62,7 +61,6 @@ resources:
   - audiobookshelf-redirect.yaml
   - immich-redirect.yaml
   - slskd-soulseek.sops.yaml
-  - slskd-deployment.yaml
   - slskd-service.yaml
   - slskd-ingress.yaml
   - resourcequota.yaml
