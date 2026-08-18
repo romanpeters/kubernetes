@@ -35,6 +35,8 @@ resources:
   - isponsorblocktv-deployment.yaml
   - gluetun-nordvpn.sops.yaml
   - media-vpn-deployment.yaml
+  - searxng-configmap.yaml
+  - searxng-deployment.yaml
   - searxng-service.yaml
   - searxng-ingress.yaml
   - transmission-service.yaml

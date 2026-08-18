@@ -1,0 +1,117 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: searxng
+  namespace: media
+  labels:
+    app.kubernetes.io/name: searxng
+    app.kubernetes.io/instance: searxng-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+data:
+  settings.yml: |
+    use_default_settings: true
+
+    search:
+      default_lang: "en"
+      default_img_lang: "en"
+      safe_search: 0
+      autocomplete: "duckduckgo"
+      default_timeout: 3.0
+      max_out: 32
+
+    server:
+      base_url: false
+      secret_key: "CHANGE-TO-RANDOM-SECRET-KEY"
+      bind_address: "0.0.0.0:8080"
+      formats:
+         - html
+         - json
+
+    engines:
+      - name: google
+        engine: google
+        shortcut: go
+        time_range_support: true
+        disabled: false
+        weights:
+          time: 0.2
+
+      - name: bing
+        engine: bing
+        shortcut: bi
+        time_range_support: true
+
+      - name: brave
+        engine: brave
+        shortcut: br
+        time_range_support: true
+
+      - name: duckduckgo
+        engine: duckduckgo
+        shortcut: ddg
+        time_range_support: true
+
+      - name: startpage
+        engine: startpage
+        shortcut: sp
+
+      - name: qwant
+        engine: qwant
+        shortcut: qw
+        time_range_support: true
+
+      - name: ecosia
+        engine: ecosia
+        shortcut: eko
+
+      - name: yahoo
+        engine: yahoo
+        shortcut: yh
+        time_range_support: true
+
+      - name: wikipedia
+        engine: wikipedia
+        shortcut: wp
+        disabled: false
+        time_range_support: true
+
+      - name: wikidata
+        engine: wikidata
+        shortcut: wk
+
+      - name: openlibrary
+        engine: openlibrary
+        shortcut: ol
+
+      - name: archiveorg
+        engine: archiveorg
+        shortcut: ao
+
+      - name: arxiv
+        engine: arxiv
+        shortcut: ax
+
+      - name: github
+        engine: github
+        shortcut: gh
+
+      - name: stackoverflow
+        engine: stackexchange
+        shortcut: so
+        disabled: false
+        categories:
+          - general
+
+      - name: openstreetmap
+        engine: openmaps
+        shortcut: om
+
+      - name: opensearch
+        engine: opensearch
+        shortcut: os
+
+      - name: youtube
+        engine: youtube
+        shortcut: yt

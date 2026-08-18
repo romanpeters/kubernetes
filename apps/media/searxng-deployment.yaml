@@ -30,15 +30,15 @@ spec:
             - /bin/sh
             - -c
             - |
-              cp /usr/local/searxng/searx/settings.yml /config/settings.yml
-              sed -i "s/ultrasecretkey/$(head -c 24 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')/g" /config/settings.yml
-              if ! grep -q '^    - json$' /config/settings.yml; then
-                sed -i '/^  formats:$/a\    - json' /config/settings.yml
-              fi
-              echo "enabled json format in searxng settings"
+              cp /configmap/settings.yml /etc/searxng/settings.yml
+              sed -i "s/CHANGE-TO-RANDOM-SECRET-KEY/$(head -c 24 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')/g" /etc/searxng/settings.yml
+              echo "substituted searxng secret_key"
           volumeMounts:
+            - name: searxng-configmap
+              mountPath: /configmap
+              readOnly: true
             - name: searxng-config
-              mountPath: /config
+              mountPath: /etc/searxng
       containers:
         - name: gluetun
           image: qmcgaw/gluetun:v3.41.1@sha256:1a5bf4b4820a879cdf8d93d7ef0d2d963af56670c9ebff8981860b6804ebc8ab
@@ -118,9 +118,12 @@ spec:
             - name: searxng-config
               mountPath: /etc/searxng
       volumes:
+        - name: searxng-configmap
+          configMap:
+            name: searxng
+        - name: searxng-config
+          emptyDir: {}
         - name: tun
           hostPath:
             path: /dev/net/tun
             type: CharDevice
-        - name: searxng-config
-          emptyDir: {}
