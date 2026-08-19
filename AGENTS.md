@@ -38,6 +38,11 @@ The cluster runs a variety of services:
 3. Ensure Flux is running on the cluster
 4. Apply the configuration to the cluster
 
+### VPN
+- Some pods use NordVPN through gluetun for their internet connection.
+- NordVPN uses a service credential found in gopass (user Qf91ci2URG4bWVkjUHmDWsEE)
+- NordVPN slots are limited so only a single shared gluetun connection to NordVPN is allowed.
+
 ## Maintenance
 
 Regular maintenance tasks:

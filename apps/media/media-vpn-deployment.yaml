@@ -45,19 +45,17 @@ spec:
             - name: slskd-config-vol
               mountPath: /config
         - name: init-searxng-settings
-          image: docker.io/searxng/searxng:2026.2.16-8e824017d@sha256:60055af6f2f1ca14b488d9c0f47a019d1dbaf15b4f6547a7194253bf2ab94744
+          image: alpine:3.21@sha256:68fd025fc45692eb22b14af1cdfd75b0d000d2893a1c9202b06e8c26a2b27f1e
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
             - -c
             - |
-              cp /usr/local/searxng/searx/settings.yml /config/settings.yml
-              sed -i "s/ultrasecretkey/$(head -c 24 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')/g" /config/settings.yml
-              if ! grep -q '^    - json$' /config/settings.yml; then
-                sed -i '/^  formats:$/a\    - json' /config/settings.yml
-              fi
-              echo "enabled json format in searxng settings"
+              cp /configmap/settings.yml /config/settings.yml
+              sed -i "s/CHANGE-TO-RANDOM-SECRET-KEY/$(openssl rand -hex 32)/g" /config/settings.yml
           volumeMounts:
+            - name: searxng-configmap
+              mountPath: /configmap
             - name: searxng-config
               mountPath: /config
         - name: init-downloads
@@ -252,6 +250,9 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media-nfs
+        - name: searxng-configmap
+          configMap:
+            name: searxng-configmap
         - name: searxng-config
           emptyDir: {}
         - name: transmission-config
