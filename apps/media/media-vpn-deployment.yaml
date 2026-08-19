@@ -45,14 +45,14 @@ spec:
             - name: slskd-config-vol
               mountPath: /config
         - name: init-searxng-settings
-          image: alpine:3.21@sha256:68fd025fc45692eb22b14af1cdfd75b0d000d2893a1c9202b06e8c26a2b27f1e
+          image: busybox:1.37@sha256:b3255e7dfbcd10cb367af0d409747d511aeb66dfac98cf30e97e87e4207dd76f
           imagePullPolicy: IfNotPresent
           command:
             - /bin/sh
             - -c
             - |
               cp /configmap/settings.yml /config/settings.yml
-              sed -i "s/CHANGE-TO-RANDOM-SECRET-KEY/$(openssl rand -hex 32)/g" /config/settings.yml
+              sed -i "s/CHANGE-TO-RANDOM-SECRET-KEY/$(head -c 24 /dev/urandom | base64 | tr -dc 'a-zA-Z0-9')/g" /config/settings.yml
           volumeMounts:
             - name: searxng-configmap
               mountPath: /configmap
