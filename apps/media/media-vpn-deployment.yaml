@@ -252,7 +252,7 @@ spec:
             claimName: media-nfs
         - name: searxng-configmap
           configMap:
-            name: searxng-configmap
+            name: searxng
         - name: searxng-config
           emptyDir: {}
         - name: transmission-config
