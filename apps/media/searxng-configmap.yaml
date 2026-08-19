@@ -20,10 +20,9 @@ data:
       autocomplete: "duckduckgo"
       default_timeout: 3.0
       max_out: 32
-
-    formats:
-      - html
-      - json
+      formats:
+        - html
+        - json
 
     server:
       base_url: false
