@@ -40,7 +40,7 @@ The cluster runs a variety of services:
 
 ### VPN
 - Some pods use NordVPN through gluetun for their internet connection.
-- NordVPN uses a service credential found in gopass (user Qf91ci2URG4bWVkjUHmDWsEE)
+- NordVPN uses a service credential found in gopass (user fyHGUDRfFvRCNfCbZAg9x3xa)
 - NordVPN slots are limited so only a single shared gluetun connection to NordVPN is allowed.
 
 ## Maintenance

@@ -21,13 +21,14 @@ data:
       default_timeout: 3.0
       max_out: 32
 
+    formats:
+      - html
+      - json
+
     server:
       base_url: false
       secret_key: "CHANGE-TO-RANDOM-SECRET-KEY"
       bind_address: "0.0.0.0:8080"
-      formats:
-         - html
-         - json
 
     engines:
       - name: google
