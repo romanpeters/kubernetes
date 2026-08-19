@@ -133,12 +133,16 @@ spec:
                   key: OPENVPN_PASSWORD
             - name: SERVER_COUNTRIES
               value: "Albania"
+            - name: OPENVPN_FLAGS
+              value: "restart 600"
             - name: FIREWALL_INPUT_PORTS
               value: "5030,5031,50300,8080,9091"
             - name: FIREWALL_OUTBOUND_SUBNETS
               value: "10.0.0.0/8,10.42.0.0/16,10.43.0.0/16"
             - name: PUBLICIP_PERIOD
               value: "300s"
+            - name: RETRY_SLEEP_DURATION
+              value: "600s"
           volumeMounts:
             - name: tun
               mountPath: /dev/net/tun
