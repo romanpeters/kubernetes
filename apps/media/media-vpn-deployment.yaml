@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/managed-by: flux
     exposure: internal
 spec:
-  replicas: 0
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
