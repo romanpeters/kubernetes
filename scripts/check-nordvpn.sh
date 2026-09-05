@@ -4,8 +4,9 @@ set -euo pipefail
 # Check whether a gluetun pod is actually connected to NordVPN.
 #
 # Test criteria per pod (the gluetun container only has busybox, so wget is used):
-#   1. gluetun logs contain a recent OpenVPN "Peer Connection Initiated" with a *.nordvpn.com server
-#   2. Public IP seen from inside the pod != public IP of the host (traffic goes through the tunnel, no leak)
+#   1. Public IP seen from inside the pod != public IP of the host (tunnel up, traffic goes through it, no leak)
+#   2. gluetun logs contain an OpenVPN "Peer Connection Initiated" with a *.nordvpn.com server
+#      (no time window: an idle long-running tunnel only logs the connection at (re)connect)
 #
 # NordVPN servers are not always behind a "NORDVPN" ASN (they run on partner
 # infrastructure, e.g. local telecom hosts), so the ipinfo.io org is reported
@@ -17,7 +18,6 @@ set -euo pipefail
 NAMESPACE="${NAMESPACE:-media}"
 CONTAINER="gluetun"
 HOST_SSH_TARGET="${HOST_SSH_TARGET:-k3s}"
-MAX_AGE_MIN="${MAX_AGE_MIN:-15}"
 
 info() { printf '  [info] %s\n' "$*"; }
 fail() { printf '  [FAIL] %s\n' "$*"; }
@@ -77,16 +77,16 @@ while IFS= read -r pod; do
     info "host public IP unknown; skipping leak check"
   fi
 
-  recent_logs=$(kubectl logs -n "$NAMESPACE" -c "$CONTAINER" "$pod" --since="${MAX_AGE_MIN}m" 2>/dev/null || true)
-  connect_line=$(printf '%s\n' "$recent_logs" | grep 'Peer Connection Initiated' | grep 'nordvpn\.com' | tail -1 || true)
+  logs_full=$(kubectl logs -n "$NAMESPACE" -c "$CONTAINER" "$pod" 2>/dev/null || true)
+  connect_line=$(printf '%s\n' "$logs_full" | grep 'Peer Connection Initiated' | grep 'nordvpn\.com' | tail -1 || true)
   if [[ -n "$connect_line" ]]; then
     ok "connected to NordVPN: ${connect_line}"
   else
-    fail "no NordVPN connection in the last ${MAX_AGE_MIN} minutes"
+    fail "no NordVPN connection in gluetun logs"
     connected=false
   fi
 
-  last_error=$(printf '%s\n' "$recent_logs" | grep -iE 'rate.?limit|failed to' | tail -1 || true)
+  last_error=$(printf '%s\n' "$logs_full" | grep -iE 'rate.?limit|failed to' | tail -1 || true)
   [[ -n "$last_error" ]] && info "recent error: ${last_error}"
 
   tun=$(kubectl exec -n "$NAMESPACE" -c "$CONTAINER" "$pod" -- sh -c 'awk "/^tun[0-9]+:/{print \$1\" rx=\"\$2\" tx=\"\$17}" /proc/net/dev' 2>/dev/null || true)
