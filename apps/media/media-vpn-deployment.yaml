@@ -135,10 +135,12 @@ spec:
               value: "600s"
             - name: DNS_UPSTREAM_RESOLVERS
               value: "google"
+            - name: DNS_UPSTREAM_RESOLVER_TYPE
+              value: "plain"
             - name: HEALTH_TARGET_ADDRESSES
               value: "8.8.8.8:443,9.9.9.9:443"
-            - name: HEALTH_ICMP_TARGET_IPS
-              value: "8.8.8.8,9.9.9.9"
+            - name: HEALTH_SMALL_CHECK_TYPE
+              value: "dns"
           volumeMounts:
             - name: tun
               mountPath: /dev/net/tun

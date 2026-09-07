@@ -12,8 +12,11 @@
 
 1. gluetun runs a DNS forwarder inside the pod whose upstream default is
    **Cloudflare DoH** (`1.1.1.1`/`1.0.0.1:853`), queried *through the NordVPN tunnel*.
-2. Cloudflare intermittently RSTs DoH connections from NordVPN egress IPs
-   (shared/VPN reputation): `read tcp ...->1.0.0.1:853: ... connection reset by peer`
+2. DoH connections from the NordVPN egress IP are intermittently RST
+   (shared/VPN reputation) — this is **not provider-specific**: switching the
+   upstream to Google DoH (`8.8.8.8:853`) produced the same
+    `read tcp ...:853: ... connection reset by peer`. Outbound ICMP through
+    the tunnel also times out. Plain UDP DNS (port 53) and TLS (443) work fine.
 3. gluetun healthchecks depend on that DNS (and on Cloudflare as a target):
    - startup check: resolves `github.com` / `cloudflare.com`
    - full periodic check (every 5 min): dials `cloudflare.com:443` / `github.com:443`
@@ -38,13 +41,17 @@ Env changes on the gluetun container in `apps/media/media-vpn-deployment.yaml`:
 
 | Env | Value | Why |
 |---|---|---|
-| `DNS_UPSTREAM_RESOLVERS` | `google` | stop using Cloudflare DoH from the tunnel |
+| `DNS_UPSTREAM_RESOLVERS` | `google` | forwarder upstream instead of the default Cloudflare |
+| `DNS_UPSTREAM_RESOLVER_TYPE` | `plain` | DoH (853) is RST from the egress IP regardless of provider; plain UDP 53 works |
 | `HEALTH_TARGET_ADDRESSES` | `8.8.8.8:443,9.9.9.9:443` | full check dials raw IPs — no DNS, no Cloudflare |
-| `HEALTH_ICMP_TARGET_IPS` | `8.8.8.8,9.9.9.9` | small check no longer pings `1.1.1.1` (if ICMP is blocked, gluetun falls back to plain UDP DNS) |
+| `HEALTH_SMALL_CHECK_TYPE` | `dns` | small check (every 1 min) does a plain UDP DNS query instead of ICMP (ICMP egress is blocked) |
+
+All values verified against the running `qmcgaw/gluetun:v3.41.1` binary
+(env validation + startup banner) before rollout.
 
 Restart-on-healthcheck-failure stays enabled: it is the right auto-healing for
-real tunnel outages, and without Cloudflare in the loop the false-positive
-source is gone.
+real tunnel outages, and with every healthcheck path on plain UDP/TLS the
+false-positive source is gone.
 
 ## Recovery runbook (if it ever recurs)
 
