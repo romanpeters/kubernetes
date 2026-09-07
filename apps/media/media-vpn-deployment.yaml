@@ -133,6 +133,12 @@ spec:
               value: "300s"
             - name: RETRY_SLEEP_DURATION
               value: "600s"
+            - name: DNS_UPSTREAM_RESOLVERS
+              value: "google"
+            - name: HEALTH_TARGET_ADDRESSES
+              value: "8.8.8.8:443,9.9.9.9:443"
+            - name: HEALTH_ICMP_TARGET_IPS
+              value: "8.8.8.8,9.9.9.9"
           volumeMounts:
             - name: tun
               mountPath: /dev/net/tun
