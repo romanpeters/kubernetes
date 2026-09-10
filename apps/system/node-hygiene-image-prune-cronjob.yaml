@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: flux
     exposure: internal
 spec:
-  schedule: "*/30 * * * *" # Run every 30 minutes to be more aggressive with cleanup
+  schedule: "*/10 * * * *"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 2
@@ -19,6 +19,8 @@ spec:
       ttlSecondsAfterFinished: 600
       template:
         spec:
+          # Run ahead of ordinary workloads when the node is under pressure.
+          priorityClassName: system-node-critical
           serviceAccountName: node-hygiene
           restartPolicy: OnFailure
           containers:
@@ -27,6 +29,10 @@ spec:
               imagePullPolicy: IfNotPresent
               securityContext:
                 privileged: true
+              resources:
+                requests:
+                  cpu: 25m
+                  memory: 64Mi
               command:
                 - /bin/sh
                 - -ec
@@ -55,6 +61,11 @@ spec:
                 - name: k3s-data
                   mountPath: /host/var/lib/rancher/k3s
           tolerations:
+            # This job must be able to run while disk pressure is active; it is
+            # the recovery path for unused container images.
+            - key: "node.kubernetes.io/disk-pressure"
+              operator: Exists
+              effect: NoSchedule
             - key: "node-role.kubernetes.io/control-plane"
               operator: Exists
               effect: NoSchedule

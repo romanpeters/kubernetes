@@ -19,12 +19,17 @@ spec:
       ttlSecondsAfterFinished: 600
       template:
         spec:
+          priorityClassName: system-node-critical
           serviceAccountName: node-hygiene
           restartPolicy: OnFailure
           containers:
             - name: cleanup
               image: rancher/k3s:v1.33.5-k3s1@sha256:fd4740667b7033055c27d424d0d2d660bf66cedbdb225d68e0eab6dd48aa0fd2
               imagePullPolicy: IfNotPresent
+              resources:
+                requests:
+                  cpu: 25m
+                  memory: 64Mi
               command:
                 - /bin/sh
                 - -ec
@@ -75,6 +80,10 @@ spec:
 
                   echo "node-hygiene-cleanup: max_age_seconds=${max_age_seconds} deleted_succeeded_pods=${deleted_succeeded} deleted_failed_pods=${deleted_failed} deleted_finished_jobs=${deleted_jobs}"
           tolerations:
+            # Keep cleanup available during disk-pressure recovery.
+            - key: "node.kubernetes.io/disk-pressure"
+              operator: Exists
+              effect: NoSchedule
             - key: "node-role.kubernetes.io/control-plane"
               operator: Exists
               effect: NoSchedule
