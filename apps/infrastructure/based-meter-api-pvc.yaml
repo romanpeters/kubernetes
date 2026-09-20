@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: based-meter-api-data
+  namespace: infrastructure
+  labels:
+    app.kubernetes.io/name: based-meter-api-data
+    app.kubernetes.io/instance: based-meter-api-data-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,6 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: infrastructure
+configMapGenerator:
+  - name: based-meter-api
+    files:
+      - server.py=based-meter-api.py
 resources:
   - namespace.yaml
   - dockerhub-read.sops.yaml
@@ -24,6 +28,10 @@ resources:
   - garage-webui-deployment.yaml
   - garage-webui-service.yaml
   - garage-webui-ingress.yaml
+  - based-meter-api-deployment.yaml
+  - based-meter-api-service.yaml
+  - based-meter-api-ingress.yaml
+  - based-meter-api-pvc.yaml
   - homepage-config.yaml
   - homepage-secrets.sops.yaml
   - homepage-rbac.yaml
