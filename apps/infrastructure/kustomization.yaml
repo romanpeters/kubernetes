@@ -20,6 +20,7 @@ resources:
   - garage-web-ingress.yaml
   - garage-web-code-ingress.yaml
   - garage-web-code-honden-auth-ingress.yaml
+  - garage-web-based-ingress.yaml
   - garage-webui-deployment.yaml
   - garage-webui-service.yaml
   - garage-webui-ingress.yaml
