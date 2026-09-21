@@ -6,10 +6,11 @@ serves the most recent entries to the based.romanpeters.nl front-end.
 
 Endpoints (all under /api):
   GET  /api/healthz   -> {"ok": true}
-  GET  /api/results   -> {"recent": [{text, score}, ...]}  (10 most recent)
+  GET  /api/results   -> {"recent": [{text, score, ts}, ...]}  (all entries
+                        from the last hour, newest first)
   POST /api/results   body {"text": str, "score": float}
-                       -> {"recent": [...]}  (10 most recent *before* this
-                          insert, so the caller's own entry is excluded)
+                        -> {"recent": [...]}  (last-hour entries *before* this
+                           insert, so the caller's own entry is excluded)
 """
 import json
 import os
@@ -20,7 +21,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 DB_PATH = os.environ.get("DB_PATH", "/data/results.db")
 PORT = int(os.environ.get("PORT", "8080"))
-RECENT_LIMIT = 10
+RECENT_WINDOW = 3600  # seconds; show every entry from the last hour
 MAX_ROWS = 500
 
 _lock = threading.Lock()
@@ -51,17 +52,22 @@ def init_db():
             conn.close()
 
 
-def recent(limit=RECENT_LIMIT):
+def recent(window=RECENT_WINDOW):
+    cutoff = int(time.time()) - window
     with _lock:
         conn = _connect()
         try:
             rows = conn.execute(
-                "SELECT text, score FROM results ORDER BY id DESC LIMIT ?",
-                (limit,),
+                "SELECT text, score, ts FROM results "
+                "WHERE ts >= ? ORDER BY ts DESC, id DESC",
+                (cutoff,),
             ).fetchall()
         finally:
             conn.close()
-    return [{"text": row["text"], "score": row["score"]} for row in rows]
+    return [
+        {"text": row["text"], "score": row["score"], "ts": row["ts"]}
+        for row in rows
+    ]
 
 
 def add(text, score):
