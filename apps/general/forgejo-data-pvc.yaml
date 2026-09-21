@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: gitea-postgres-data
+  name: forgejo-data
   labels:
-    app.kubernetes.io/name: gitea-postgres-data
-    app.kubernetes.io/instance: gitea-postgres-data-prod
+    app.kubernetes.io/name: forgejo-data
+    app.kubernetes.io/instance: forgejo-data-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
     exposure: internal
@@ -12,7 +12,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: local-path
-  volumeName: pvc-ca9e9499-eb87-4aef-97a3-972954a3dddf
   resources:
     requests:
       storage: 10Gi

@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo
+  labels:
+    app.kubernetes.io/name: forgejo
+    app.kubernetes.io/instance: forgejo-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forgejo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: forgejo
+    spec:
+      tolerations:
+        - key: "node.kubernetes.io/unschedulable"
+          operator: "Exists"
+          effect: "NoSchedule"
+      containers:
+        - name: forgejo
+          image: codeberg.org/forgejo/forgejo:16.0.5@sha256:cf5f5ae6acf2ababca0ee3d255705b83a47f35b25e07fc931d694d60664053fe
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+            - name: ssh
+              containerPort: 22
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: FORGEJO__database__DB_TYPE
+              value: postgres
+            - name: FORGEJO__database__HOST
+              value: forgejo-postgres:5432
+            - name: FORGEJO__database__NAME
+              value: forgejo
+            - name: FORGEJO__database__USER
+              value: forgejo
+            - name: FORGEJO__database__PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-secrets
+                  key: DB_PASSWORD
+            - name: FORGEJO__security__INTERNAL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-secrets
+                  key: INTERNAL_TOKEN
+            - name: FORGEJO__server__DOMAIN
+              value: git.romanpeters.nl
+            - name: FORGEJO__server__ROOT_URL
+              value: https://git.romanpeters.nl/
+            - name: FORGEJO__server__SSH_PORT
+              value: "22"
+            - name: FORGEJO__server__SSH_LISTEN_PORT
+              value: "22"
+            - name: FORGEJO__server__HTTP_PORT
+              value: "3000"
+            - name: FORGEJO__server__APP_DATA_PATH
+              value: /data
+          volumeMounts:
+            - name: forgejo-data
+              mountPath: /data
+      volumes:
+        - name: forgejo-data
+          persistentVolumeClaim:
+            claimName: forgejo-data

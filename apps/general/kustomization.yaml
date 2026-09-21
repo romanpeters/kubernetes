@@ -33,14 +33,14 @@ resources:
   - openwebui-deployment.yaml
   - openwebui-service.yaml
   - openwebui-ingress.yaml
-  - gitea-postgres-data-pvc.yaml
-  - gitea-postgres.yaml
-  - gitea-data-pvc.yaml
-  - gitea-deployment.yaml
-  - gitea-service.yaml
-  - gitea-ingress.yaml
-  - gitea-ssh-ingressroute.yaml
-  - gitea-secrets.sops.yaml
+  - forgejo-postgres-data-pvc.yaml
+  - forgejo-postgres.yaml
+  - forgejo-data-pvc.yaml
+  - forgejo-deployment.yaml
+  - forgejo-service.yaml
+  - forgejo-ingress.yaml
+  - forgejo-ssh-ingressroute.yaml
+  - forgejo-secrets.sops.yaml
   - resourcequota.yaml
   - limitrange.yaml
   - networkpolicy.yaml

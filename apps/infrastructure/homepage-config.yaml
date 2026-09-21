@@ -127,7 +127,7 @@ data:
             icon: open-webui
             siteMonitor: https://chat.romanpeters.nl
             siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
-        - Gitea:
+        - Forgejo:
             href: https://git.romanpeters.nl
             icon: gitea
             siteMonitor: https://git.romanpeters.nl

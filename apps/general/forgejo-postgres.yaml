@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gitea-postgres
+  name: forgejo-postgres
   labels:
-    app.kubernetes.io/name: gitea-postgres
-    app.kubernetes.io/instance: gitea-postgres-prod
+    app.kubernetes.io/name: forgejo-postgres
+    app.kubernetes.io/instance: forgejo-postgres-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
     exposure: internal
@@ -12,11 +12,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: gitea-postgres
+      app.kubernetes.io/name: forgejo-postgres
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: gitea-postgres
+        app.kubernetes.io/name: forgejo-postgres
     spec:
       containers:
         - name: postgres
@@ -27,13 +27,13 @@ spec:
               containerPort: 5432
           env:
             - name: POSTGRES_DB
-              value: gitea
+              value: forgejo
             - name: POSTGRES_USER
-              value: gitea
+              value: forgejo
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: gitea-secrets
+                  name: forgejo-secrets
                   key: DB_PASSWORD
           volumeMounts:
             - name: data
@@ -41,21 +41,21 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: gitea-postgres-data
+            claimName: forgejo-postgres-data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: gitea-postgres
+  name: forgejo-postgres
   labels:
-    app.kubernetes.io/name: gitea-postgres
-    app.kubernetes.io/instance: gitea-postgres-prod
+    app.kubernetes.io/name: forgejo-postgres
+    app.kubernetes.io/instance: forgejo-postgres-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
     exposure: internal
 spec:
   selector:
-    app.kubernetes.io/name: gitea-postgres
+    app.kubernetes.io/name: forgejo-postgres
   ports:
     - name: postgres
       port: 5432
