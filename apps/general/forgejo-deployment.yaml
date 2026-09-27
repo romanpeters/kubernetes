@@ -64,6 +64,34 @@ spec:
               value: "3000"
             - name: FORGEJO__server__APP_DATA_PATH
               value: /data
+            # Authentik OIDC login. The auth source name must be exactly
+            # "authentik": Forgejo's callback route is /user/oauth2/<name>/callback
+            # and that is the redirect URI registered in Authentik.
+            - name: FORGEJO__oauth2__authentik__ENABLED
+              value: "true"
+            - name: FORGEJO__oauth2__authentik__DISPLAY_NAME
+              value: "Authentik"
+            - name: FORGEJO__oauth2__authentik__AUTO_DISCOVER_URL
+              value: "https://auth.romanpeters.nl/application/o/forgejo/.well-known/openid-configuration"
+            - name: FORGEJO__oauth2__authentik__CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-secrets
+                  key: OAUTH2_AUTHENTIK_CLIENT_ID
+            - name: FORGEJO__oauth2__authentik__CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-secrets
+                  key: OAUTH2_AUTHENTIK_CLIENT_SECRET
+            - name: FORGEJO__oauth2__authentik__SCOPES
+              value: "openid profile email"
+            # The profile scope already carries groups as an array of names, and
+            # Forgejo turns the claim into a set, so this restricts login to the
+            # group that already backs the Authentik app.
+            - name: FORGEJO__oauth2__authentik__REQUIRED_CLAIM_NAME
+              value: "groups"
+            - name: FORGEJO__oauth2__authentik__REQUIRED_CLAIM_VALUE
+              value: "forgejo-users"
           volumeMounts:
             - name: forgejo-data
               mountPath: /data
