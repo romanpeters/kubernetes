@@ -64,13 +64,16 @@ spec:
               value: "3000"
             - name: FORGEJO__server__APP_DATA_PATH
               value: /data
-            # Authentik OIDC login. Two things are load-bearing here:
-            # the auth source name must be exactly "authentik", because Forgejo
-            # builds the callback path from it (/user/oauth2/<name>/callback)
-            # and that is the redirect URI registered in Authentik; and the
-            # section separator is a single "__", so the section has to be
-            # written as "oauth2.authentik" - "oauth2__authentik" would land the
-            # keys in [oauth2] as "authentik__*" and be silently ignored.
+            # Authentik OIDC login. Three things are load-bearing here:
+            # - the section separator is a single "__", so the section has to be
+            #   written as "oauth2.authentik" - "oauth2__authentik" lands the keys
+            #   in [oauth2] as "authentik__*" and they are silently ignored;
+            # - Forgejo title-cases the source name, so the auth source is called
+            #   "Authentik" and its callback is /user/oauth2/Authentik/callback -
+            #   the lookup is case sensitive, and that exact-cased URL is the
+            #   redirect URI registered on the Authentik provider;
+            # - the client id/secret must be the confidential pair of the
+            #   Authentik OAuth2 provider "Provider for Forgejo".
             - name: FORGEJO__oauth2.authentik__ENABLED
               value: "true"
             - name: FORGEJO__oauth2.authentik__DISPLAY_NAME
@@ -88,6 +91,12 @@ spec:
                   name: forgejo-secrets
                   key: OAUTH2_AUTHENTIK_CLIENT_SECRET
             - name: FORGEJO__oauth2.authentik__SCOPES
+              value: "openid profile email"
+            # Goth asks an OIDC provider for "openid" only, and the per-source
+            # SCOPES key above does not change that. The profile scope is what
+            # carries groups, so without this the required-claim check below
+            # would never match.
+            - name: FORGEJO__oauth2_client__OPENID_CONNECT_SCOPES
               value: "openid profile email"
             # The profile scope already carries groups as an array of names, and
             # Forgejo turns the claim into a set, so this restricts login to the
