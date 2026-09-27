@@ -28,6 +28,8 @@ resources:
   - garage-webui-deployment.yaml
   - garage-webui-service.yaml
   - garage-webui-ingress.yaml
+  - forgejo-runner-deployment.yaml
+  - forgejo-runner-secret.sops.yaml
   - based-meter-api-deployment.yaml
   - based-meter-api-service.yaml
   - based-meter-api-ingress.yaml

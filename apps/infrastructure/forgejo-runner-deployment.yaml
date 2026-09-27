@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo-runner
+  namespace: infrastructure
+  labels:
+    app.kubernetes.io/name: forgejo-runner
+    app.kubernetes.io/instance: forgejo-runner-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: forgejo-runner
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: forgejo-runner
+    spec:
+      tolerations:
+        - key: "node.kubernetes.io/unschedulable"
+          operator: "Exists"
+          effect: "NoSchedule"
+      initContainers:
+        # MinIO client (mc) is the S3 client used by workflows to talk to Garage.
+        # Garage rejects rclone's SigV4 signing, but mc's is accepted.
+        - name: install-mc
+          image: library/alpine:3.23@sha256:85fe1e81d6758c208f3e1eed4338a1997e19d4be002d4dd32d3100c9a8c010a0
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              set -e
+              apk add --no-cache curl ca-certificates >/dev/null
+              curl -fsSL -o /opt/tools/mc \
+                https://github.com/minio/mc/releases/download/RELEASE.2025-08-13T08-35-41Z/mc.linux-amd64.RELEASE.2025-08-13T08-35-41Z
+              chmod +x /opt/tools/mc
+              /opt/tools/mc --version | head -1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          volumeMounts:
+            - name: tools
+              mountPath: /opt/tools
+      containers:
+        - name: runner
+          image: docker.io/gitea/runner:4.0.0@sha256:7b5aa1137a262c2ca452a420c645629c95c5277920d2bdeb90757cb5ea24689f
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            # Registration token. Read only by the bootstrap script; never needs
+            # to be rotated because the runner reuses its persisted registration.
+            - name: GITEA_RUNNER_REGISTRATION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: forgejo-runner-secret
+                  key: registration_token
+            - name: GITEA_RUNNER_NAME
+              value: runner-k3s-1
+            - name: GITEA_RUNNER_INSTANCE
+              value: https://git.romanpeters.nl
+            - name: GITEA_RUNNER_LABELS
+              value: linux_amd64
+          workingDir: /data
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              set -e
+              if [ ! -s /data/.runner ]; then
+                echo "No persisted registration found, registering runner..."
+                gitea-runner register \
+                  --instance "$GITEA_RUNNER_INSTANCE" \
+                  --name "$GITEA_RUNNER_NAME" \
+                  --token "$GITEA_RUNNER_REGISTRATION_TOKEN" \
+                  --labels "$GITEA_RUNNER_LABELS" \
+                  --no-interactive
+              else
+                echo "Reusing persisted registration."
+              fi
+              exec gitea-runner daemon
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+          volumeMounts:
+            - name: runner-data
+              mountPath: /data
+            - name: tools
+              mountPath: /opt/tools
+      volumes:
+        - name: runner-data
+          hostPath:
+            path: /var/lib/forgejo-runner
+            type: DirectoryOrCreate
+        - name: tools
+          emptyDir: {}
