@@ -1,11 +1,11 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: heimdall-redirect-eskimos
-  namespace: general
+  name: romanpeters-redirect-eskimos
+  namespace: infrastructure
   labels:
-    app.kubernetes.io/name: heimdall-redirect-eskimos
-    app.kubernetes.io/instance: heimdall-redirect-eskimos-prod
+    app.kubernetes.io/name: romanpeters-redirect-eskimos
+    app.kubernetes.io/instance: romanpeters-redirect-eskimos-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
     exposure: public
@@ -18,11 +18,11 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: heimdall-redirect-root
-  namespace: general
+  name: romanpeters-redirect-root
+  namespace: infrastructure
   labels:
-    app.kubernetes.io/name: heimdall-redirect-root
-    app.kubernetes.io/instance: heimdall-redirect-root-prod
+    app.kubernetes.io/name: romanpeters-redirect-root
+    app.kubernetes.io/instance: romanpeters-redirect-root-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
     exposure: internal
@@ -35,15 +35,15 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: heimdall-root-alias
-  namespace: general
+  name: romanpeters-root-alias
+  namespace: infrastructure
   annotations:
     external-dns: external
     traefik.ingress.kubernetes.io/router.entrypoints: websecure-int,websecure-pub
-    traefik.ingress.kubernetes.io/router.middlewares: general-heimdall-redirect-eskimos@kubernetescrd,general-heimdall-redirect-root@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: infrastructure-romanpeters-redirect-eskimos@kubernetescrd,infrastructure-romanpeters-redirect-root@kubernetescrd
   labels:
-    app.kubernetes.io/name: heimdall-root-alias
-    app.kubernetes.io/instance: heimdall-root-alias-prod
+    app.kubernetes.io/name: romanpeters-root-alias
+    app.kubernetes.io/instance: romanpeters-root-alias-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
     exposure: public
@@ -62,9 +62,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: heimdall
+                name: garage
                 port:
-                  name: http
+                  name: web
     - host: www.romanpeters.nl
       http:
         paths:
@@ -72,6 +72,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: heimdall
+                name: garage
                 port:
-                  name: http
+                  name: web

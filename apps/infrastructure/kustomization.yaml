@@ -26,6 +26,8 @@ resources:
   - garage-web-code-honden-auth-ingress.yaml
   - garage-web-based-ingress.yaml
   - garage-web-dev-ingress.yaml
+  - garage-web-hello-ingress.yaml
+  - romanpeters-root-alias.yaml
   - garage-webui-deployment.yaml
   - garage-webui-service.yaml
   - garage-webui-ingress.yaml

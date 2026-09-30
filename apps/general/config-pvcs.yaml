@@ -20,25 +20,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: heimdall-config
-  labels:
-    app.kubernetes.io/name: heimdall-config
-    app.kubernetes.io/instance: heimdall-config-prod
-    app.kubernetes.io/part-of: homelab
-    app.kubernetes.io/managed-by: flux
-    exposure: internal
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: local-path
-  volumeName: pvc-587df120-9571-4b87-a4f7-b249b755d7b7
-  resources:
-    requests:
-      storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: homebox-data
   labels:
     app.kubernetes.io/name: homebox-data
