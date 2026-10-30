@@ -28,6 +28,12 @@ spec:
           env:
             - name: TZ
               value: "Europe/Amsterdam"
+            # Required since homebox 0.27: >= 32 bytes, rotating invalidates API keys.
+            - name: HBOX_AUTH_API_KEY_PEPPER
+              valueFrom:
+                secretKeyRef:
+                  name: homebox-secrets
+                  key: HBOX_AUTH_API_KEY_PEPPER
           volumeMounts:
             - name: data
               mountPath: /data

@@ -10,6 +10,7 @@ resources:
   - n8n-service.yaml
   - n8n-ingress.yaml
   - homebox-deployment.yaml
+  - homebox-secrets.sops.yaml
   - homebox-service.yaml
   - homebox-ingress.yaml
   - mealie-pvc.yaml
