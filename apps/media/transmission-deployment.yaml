@@ -51,7 +51,8 @@ spec:
               fi
 
               jq -e '
-                .["alt-speed-enabled"] = false
+                .["alt-speed-time-enabled"] = false
+                | .["alt-speed-enabled"] = false
               ' /config/settings.json >/config/settings.json.tmp
               mv /config/settings.json.tmp /config/settings.json
           volumeMounts:
