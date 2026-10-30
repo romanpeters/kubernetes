@@ -25,7 +25,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: image-prune
-              image: rancher/k3s:v1.33.5-k3s1@sha256:fd4740667b7033055c27d424d0d2d660bf66cedbdb225d68e0eab6dd48aa0fd2
+              image: rancher/k3s:v1.37.1-k3s1@sha256:ca7f37d993d82ef0dcdcfecb2e0e2618ea541dbaffc620c8cedebe01a82acd0d
               imagePullPolicy: IfNotPresent
               securityContext:
                 privileged: true
