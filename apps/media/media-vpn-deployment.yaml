@@ -134,12 +134,25 @@ spec:
               value: "300s"
             - name: RETRY_SLEEP_DURATION
               value: "600s"
+            # Encrypted DNS (port 443) so a VPN exit that blocks, hijacks or
+            # SERVFAILs plaintext port 53 cannot break name resolution for the
+            # whole pod (that is what crash-looped slskd on 2026-10-30).
             - name: DNS_UPSTREAM_RESOLVERS
-              value: "google"
+              value: "cloudflare,quad9"
             - name: DNS_UPSTREAM_RESOLVER_TYPE
-              value: "plain"
+              value: "doh"
+            # gluetun downloads its DNS filter block lists before it starts its
+            # resolver. Behind an exit where githubusercontent.com is unreachable
+            # that download fails, so the resolver never starts and every
+            # container loses DNS (circular failure). This pod does not need
+            # DNS-level blocking, so drop the downloads entirely.
+            - name: BLOCK_MALICIOUS
+              value: "off"
+            # Hostnames, not IPs: the TCP+TLS healthcheck then resolves through
+            # gluetun's own resolver, so a broken resolver fails the check and
+            # gluetun restarts the VPN instead of staying green while DNS is dead.
             - name: HEALTH_TARGET_ADDRESSES
-              value: "8.8.8.8:443,9.9.9.9:443"
+              value: "cloudflare.com:443,dns.google:443"
             - name: HEALTH_SMALL_CHECK_TYPE
               value: "dns"
           volumeMounts:
