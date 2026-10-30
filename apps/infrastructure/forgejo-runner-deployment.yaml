@@ -11,6 +11,11 @@ metadata:
     exposure: internal
 spec:
   replicas: 1
+  # The runner file at /var/lib/forgejo-runner/.runner is locked by the running
+  # process, so a surge pod cannot start next to it. Recreate keeps a single
+  # process per node.
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: forgejo-runner
