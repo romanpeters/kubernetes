@@ -20,7 +20,7 @@ spec:
     spec:
       initContainers:
         - name: immich-data-init
-          image: busybox:1.37@sha256:b3255e7dfbcd10cb367af0d409747d511aeb66dfac98cf30e97e87e4207dd76f
+          image: busybox:1.38@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
           command:
             - sh
             - -c

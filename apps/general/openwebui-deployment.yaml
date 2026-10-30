@@ -26,7 +26,7 @@ spec:
     spec:
       initContainers:
         - name: bootstrap-ollama-config
-          image: ghcr.io/open-webui/open-webui:v0.8.3@sha256:205e9cf23b66553643b065afcdeffb7f86b35bf36e0ce643dc56946a911954b7
+          image: ghcr.io/open-webui/open-webui:v0.12.5@sha256:03443b8de6b617da9d900edd09b4bf1cb0ddbfdcba6afb42c548336a0b821ded
           command: ["python", "/bootstrap/patch_ollama_config.py"]
           volumeMounts:
             - name: data
@@ -35,7 +35,7 @@ spec:
               mountPath: /bootstrap
       containers:
         - name: openwebui
-          image: ghcr.io/open-webui/open-webui:v0.8.3@sha256:205e9cf23b66553643b065afcdeffb7f86b35bf36e0ce643dc56946a911954b7
+          image: ghcr.io/open-webui/open-webui:v0.12.5@sha256:03443b8de6b617da9d900edd09b4bf1cb0ddbfdcba6afb42c548336a0b821ded
           ports:
             - containerPort: 8080
               name: http

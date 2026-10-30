@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: homebox
-          image: ghcr.io/sysadminsmedia/homebox:0.23.1@sha256:facd9b795952602d5c54eacfcd0f3533040e6b556f461e423a2d2445ed8736f9
+          image: ghcr.io/sysadminsmedia/homebox:0.27.1@sha256:9d0b64776c694f018c0ca06faf52105a33ca376024f46bb58e6ab0e2b728bb61
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
