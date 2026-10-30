@@ -35,7 +35,7 @@ spec:
               mountPath: /data
       containers:
         - name: immich-server
-          image: ghcr.io/immich-app/immich-server:v2.5.6@sha256:aa163d2e1cc2b16a9515dd1fef901e6f5231befad7024f093d7be1f2da14341a
+          image: ghcr.io/immich-app/immich-server:v3.3.5@sha256:485d546a2e31d6a8b4db8423fcba5c109de8c218d93410af115fd1ccfc4352a6
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
