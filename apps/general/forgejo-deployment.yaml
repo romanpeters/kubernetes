@@ -24,7 +24,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: forgejo
-          image: codeberg.org/forgejo/forgejo:16.0.5@sha256:cf5f5ae6acf2ababca0ee3d255705b83a47f35b25e07fc931d694d60664053fe
+          image: codeberg.org/forgejo/forgejo:17.0.1@sha256:fcd19ff4ebc85fb098a67e8e1d0d5a84d07dd6e8a23edcfdfd5b71a6178953be
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
