@@ -20,7 +20,12 @@
     {
       "description": "Always keep Docker image references pinned to digests (repo:tag@sha256:...)",
       "matchDatasources": ["docker"],
-      "pinDigests": true,
+      "pinDigests": true
+    },
+    {
+      "description": "Group digest-only updates in a single PR; majors must not be mixed in here",
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
       "groupName": "pin docker image digests"
     },
     {
