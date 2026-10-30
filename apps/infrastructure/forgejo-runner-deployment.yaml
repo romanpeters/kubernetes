@@ -51,7 +51,7 @@ spec:
               mountPath: /opt/tools
       containers:
         - name: runner
-          image: docker.io/gitea/runner:4.0.0@sha256:7b5aa1137a262c2ca452a420c645629c95c5277920d2bdeb90757cb5ea24689f
+          image: docker.io/gitea/runner:5.2.4@sha256:e8b3c7a5ed435fec38d1faf730cb784606cdd1c02e8543b6b96525b53281e60a
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
