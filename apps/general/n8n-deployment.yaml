@@ -36,6 +36,10 @@ spec:
               value: "5678"
             - name: WEBHOOK_URL
               value: "https://n8n.romanpeters.nl/"
+            # n8n 2.0+ excludes ExecuteCommand and LocalFileTrigger by default;
+            # the active "Exec" workflow relies on the command node.
+            - name: NODES_EXCLUDE
+              value: "[]"
           volumeMounts:
             - name: data
               mountPath: /home/node/.n8n
