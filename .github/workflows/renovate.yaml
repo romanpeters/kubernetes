@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
+  push:
+    paths:
+      - .github/renovate.json
+      - .github/workflows/renovate.yaml
 permissions:
   contents: write
   pull-requests: write
