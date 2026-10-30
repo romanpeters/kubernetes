@@ -36,6 +36,12 @@
       "labels": ["dependencies", "renovate", "major-update", "manual-review"]
     },
     {
+      "description": "linuxserver/lidarr also publishes the 2021 pre-1.0 tag 8.1.2135 (old 0.8.1.2135); keep it on the current 3.x line",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["lscr.io/linuxserver/lidarr"],
+      "allowedVersions": ">=3 <4"
+    },
+    {
       "description": "Auto-merge non-major updates for selected app paths after CI checks pass",
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["minor", "patch", "digest"],
