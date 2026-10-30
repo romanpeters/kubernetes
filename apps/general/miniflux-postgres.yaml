@@ -40,8 +40,10 @@ spec:
                   name: miniflux-secrets
                   key: DB_PASSWORD
           volumeMounts:
+            # postgres:18 moved its default PGDATA to /var/lib/postgresql/18/docker,
+            # so the volume has to cover /var/lib/postgresql (not .../data).
             - name: data
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
       volumes:
         - name: data
           persistentVolumeClaim:
