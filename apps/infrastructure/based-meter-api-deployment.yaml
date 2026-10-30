@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+          image: python:3.15-slim@sha256:94d3426f1def7db4a106a232ac121bfd975393e5dfd40a619b955fae45fe7913
           imagePullPolicy: IfNotPresent
           command:
             - python3

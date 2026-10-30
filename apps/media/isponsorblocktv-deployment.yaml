@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: isponsorblocktv
-          image: ghcr.io/dmunozv04/isponsorblocktv:v2.6.1@sha256:545856523283753ebcf4b400a46895b9906844be5265a0f4cab98a6b0bdf84be
+          image: ghcr.io/dmunozv04/isponsorblocktv:v2.11.0@sha256:d1e876636754fb2b54490feebe3af4a321f7f2a932a2d57b67b2a667eea40823
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: config
