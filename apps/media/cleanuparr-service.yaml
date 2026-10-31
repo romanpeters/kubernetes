@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cleanuparr
+  labels:
+    app.kubernetes.io/name: cleanuparr
+    app.kubernetes.io/instance: cleanuparr-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: cleanuparr
+  ports:
+    - name: http
+      port: 11011
+      targetPort: http
