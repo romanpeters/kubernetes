@@ -19,51 +19,56 @@ data:
         base_url: http://sonarr:8989
         api_key: !secret SONARR_API_KEY
         quality_definition:
+          # Size policy: minimise file size at acceptable quality.
+          # Minimums are 0 so smaller encodes are never rejected; maximums are
+          # capped at 45 MB/min for 1080p and 25 MB/min for 720p (~1.1 GB and
+          # ~600 MB for a 24 minute episode). Remux sizes stay high but Remux is
+          # disabled in the profiles that matter.
           qualities:
             - quality: "Bluray-1080p"
-              min: 50.4
-              preferred: 50.4
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 45
             - quality: "Bluray-1080p Remux"
-              min: 68.3
-              preferred: 68.3
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 60
             - quality: "Bluray-2160p"
-              min: 68.3
-              preferred: 68.3
+              min: 0
+              preferred: 0
               max: 68.3
             - quality: "Bluray-2160p Remux"
-              min: 68.3
-              preferred: 68.3
+              min: 0
+              preferred: 0
               max: 68.3
             - quality: "Bluray-480p"
-              min: 2
-              preferred: 2
+              min: 0
+              preferred: 0
               max: 18
             - quality: "Bluray-576p"
-              min: 2
-              preferred: 2
+              min: 0
+              preferred: 0
               max: 18
             - quality: "Bluray-720p"
-              min: 17.1
-              preferred: 17.1
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 25
             - quality: "DVD"
               min: 0
               preferred: 0
               max: 18
             - quality: "HDTV-1080p"
-              min: 15
-              preferred: 15
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 45
             - quality: "HDTV-2160p"
-              min: 25
-              preferred: 25
+              min: 0
+              preferred: 0
               max: 68.3
             - quality: "HDTV-720p"
-              min: 10
-              preferred: 10
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 25
             - quality: "Raw-HD"
               min: 0
               preferred: 0
@@ -77,37 +82,37 @@ data:
               preferred: 0
               max: 18
             - quality: "WEBDL-1080p"
-              min: 15
-              preferred: 15
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 45
             - quality: "WEBDL-2160p"
-              min: 25
-              preferred: 25
+              min: 0
+              preferred: 0
               max: 68.3
             - quality: "WEBDL-480p"
               min: 0
               preferred: 0
               max: 18
             - quality: "WEBDL-720p"
-              min: 10
-              preferred: 10
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 25
             - quality: "WEBRip-1080p"
-              min: 15
-              preferred: 15
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 45
             - quality: "WEBRip-2160p"
-              min: 25
-              preferred: 25
+              min: 0
+              preferred: 0
               max: 68.3
             - quality: "WEBRip-480p"
-              min: 2
-              preferred: 2
+              min: 0
+              preferred: 0
               max: 18
             - quality: "WEBRip-720p"
-              min: 10
-              preferred: 10
-              max: 68.3
+              min: 0
+              preferred: 0
+              max: 25
         include:
           - template: sonarr-quality-definition-series
           - template: sonarr-v4-quality-profile-web-1080p
