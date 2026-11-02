@@ -4,14 +4,13 @@ metadata:
   name: homepage
   namespace: infrastructure
   annotations:
-    external-dns: external
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure-int,websecure-pub
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure-int
   labels:
     app.kubernetes.io/name: homepage
     app.kubernetes.io/instance: homepage-prod
     app.kubernetes.io/part-of: homelab
     app.kubernetes.io/managed-by: flux
-    exposure: public
+    exposure: internal
 spec:
   ingressClassName: traefik
   tls:

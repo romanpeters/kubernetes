@@ -174,11 +174,6 @@ data:
             icon: grafana
             siteMonitor: https://dashboard.romanpeters.nl
             siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
-        - ntfy:
-            href: https://ntfy.romanpeters.nl
-            icon: ntfy
-            siteMonitor: https://ntfy.romanpeters.nl
-            siteMonitorExpectedCodes: [200, 301, 302, 303, 307, 308]
         - ChangeDetection:
             href: https://change.romanpeters.nl
             icon: changedetection

@@ -1,0 +1,49 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: security-headers
+  namespace: infrastructure
+  labels:
+    app.kubernetes.io/name: security-headers
+    app.kubernetes.io/instance: security-headers-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  # Applied globally through the websecure-int / websecure-pub entrypoints
+  # (see apps/system/traefik-helmchartconfig.yaml). Deliberately no CSP: the
+  # hosted apps ship their own and a broad policy here breaks them.
+  headers:
+    stsSeconds: 31536000
+    stsIncludeSubdomains: true
+    stsPreload: false
+    forceSTSHeader: true
+    contentTypeNosniff: true
+    browserXssFilter: true
+    frameDeny: true
+    referrerPolicy: strict-origin-when-cross-origin
+    customResponseHeaders:
+      Permissions-Policy: "camera=(), microphone=(), geolocation=()"
+      X-Permitted-Cross-Domain-Policies: "none"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: authentik-rate-limit
+  namespace: infrastructure
+  labels:
+    app.kubernetes.io/name: authentik-rate-limit
+    app.kubernetes.io/instance: authentik-rate-limit-prod
+    app.kubernetes.io/part-of: homelab
+    app.kubernetes.io/managed-by: flux
+    exposure: internal
+spec:
+  # Login endpoints are per-source-IP: 10 requests/second sustained, 20 burst.
+  # Legitimate logins need a handful; credential stuffing and password spraying
+  # get throttled without locking a real user out.
+  rateLimit:
+    average: 10
+    burst: 20
+    sourceCriterion:
+      ipStrategy:
+        depth: 1

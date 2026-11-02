@@ -14,8 +14,9 @@ spec:
     additionalArguments:
       - "--entrypoints.web.forwardedHeaders.insecure=true"
       - "--entryPoints.websecure-int.http.tls=true"
-      - "--entryPoints.websecure-int.http.middlewares=infrastructure-lan-allow-10-8@kubernetescrd"
+      - "--entryPoints.websecure-int.http.middlewares=infrastructure-lan-allow-10-8@kubernetescrd,infrastructure-security-headers@kubernetescrd"
       - "--entryPoints.websecure-pub.http.tls=true"
+      - "--entryPoints.websecure-pub.http.middlewares=infrastructure-security-headers@kubernetescrd"
       - "--providers.kubernetescrd.allowExternalNameServices=true"
       - "--providers.kubernetesingress.allowExternalNameServices=true"
     ports:

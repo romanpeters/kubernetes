@@ -12,6 +12,7 @@ resources:
   - helmrepo.yaml
   - authentik-secrets.sops.yaml
   - authentik-forward-auth-middleware.yaml
+  - security-headers-middleware.yaml
   - code-html-extensionless-middleware.yaml
   - lan-allow-10-8-middleware.yaml
   - helmrelease.yaml
