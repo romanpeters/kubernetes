@@ -18,7 +18,7 @@ data:
         http:
           method: GET
           headers:
-            Host: homepage.romanpeters.nl
+            Host: hello.romanpeters.nl
           valid_http_versions:
             - HTTP/1.1
             - HTTP/2.0

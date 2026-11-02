@@ -152,4 +152,4 @@ data:
               severity: critical
             annotations:
               summary: Traefik VIP down
-              description: VIP {{ $labels.vip }} is not reachable from the cluster.
+              description: VIP {{ $labels.instance }} is not reachable from the cluster.
