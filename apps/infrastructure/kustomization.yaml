@@ -53,6 +53,7 @@ resources:
   - homepage-tv-ingress.yaml
   - homepage-tv-redirects.yaml
   - traefik-external-services.yaml
+  - hermes-web.yaml
   - traefik-external-ingressroutes.yaml
   - traefik-proxmox-transport.yaml
   - romanpeters-wildcard-cert.yaml
