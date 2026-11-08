@@ -1,0 +1,2 @@
+[mounts]
+	path = /root/work/kubernetes/.local/share/gopass/stores/root
