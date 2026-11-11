@@ -40,14 +40,21 @@ spec:
             - name: WEBUI_ENABLED
               value: "false"
           volumeMounts:
-            - name: config
+            # soularr writes its pagination cursor into /data, so the directory
+            # must be writable; only config.ini comes from the secret.
+            - name: state
               mountPath: /data
+            - name: config
+              mountPath: /data/config.ini
+              subPath: config.ini
               readOnly: true
             # Same PVC and the same paths as lidarr and slskd see them, so the
             # config's download_dir is literally identical for all three.
             - name: media
               mountPath: /mnt/media
       volumes:
+        - name: state
+          emptyDir: {}
         - name: config
           secret:
             secretName: soularr-config
