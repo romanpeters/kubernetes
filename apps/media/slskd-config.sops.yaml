@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: slskd-config-file
+    namespace: media
+    labels:
+        app.kubernetes.io/name: slskd
+        app.kubernetes.io/instance: slskd-prod
+        app.kubernetes.io/part-of: homelab
+        app.kubernetes.io/managed-by: flux
+        exposure: internal
+type: Opaque
+stringData:
+    slskd.yml: ENC[AES256_GCM,data:tMvJFBvRTSOWrw4H1vbEbEbwDECS5vuF1KHPPv/Q7CX/sgmbYdCNzLJ14VLSPtOjYjChVEoxCQHnoZ9RMaJmtJiJhyK+aAybrsuTqxiFkAsICrzGuAETSFLTCOFR9iF8IGC6YuMnb0S8jCiwfKjLdIuYr6M6Vt3wMJdZ7CBv8QKJxE5HkULYgsURd9JFMZz6GKJQWCt+coEdGBDQr7gpJInuw13BM18RzeFmKH+blgaK1OKBW1CZXV8LWnI5NvD2nc0vYlmHs3+6Jn7MEcIw/oMW3yQKoxTJRN9Vt/994e5m4VrqW9HDuz9HAtVUbXYrR06+ftCk3xM80/MQjlbAbeC80acrN80V9VBvxcXqPz8IFkKdAfVfXSPxzQ+IeucFsHdl9/P29oF91XK4xZaz3siB4R99n4g73fOwWGeDz+l0fdDmJ/QSiQ9Y/MtMxjNP09OlHz/BsqEbkc64ZYUtSuGZ9XNmWV6XZcKpCLhgv+t4Vefzdrliq66v0pIyn61lSCdtfP3+u5iSQITpLL4SqCR0XR/mD53wu+/GaBer0zudS4z3FqH5esxvqM+mi+a9coY6zzDa5eQ6bR3ZsNHCa03+XfMnhgh3Wb/JU5xurES+PkEWo5Q6huAN4FgIZ9JlaCY368gbpcJn11VAQgNEUAa3fsUti8u3H5vRdd8wJyQ0I/NHH7EBwiIu7joR,iv:erfGx+M373fXoRUmMuOc4ymYAZwJQTk4Uzoj2G650g0=,tag:EBT45yd5egqCHfFdZoVY6A==,type:str]
+sops:
+    age:
+        - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBVdDNCSWVzWFRxZ2ZKaXQ5
+            ZVJ2N1VjZjVwVldIRHNPdXZWYlViTFFJT2ljCjNZMXhjYzlkS0RhMCtCM01Ib0ZG
+            WHd5NFppeHdXY09XOFR5Zno5Wk9XRkEKLS0tIDZSNjVkWTJ0VFMwSThSM2xjMHdH
+            aFdvamFNZ2JvampJRmJLZHlMdjhGZHcKf0GZtARcTQktvQo1q0yYyfwRZ96hk6+F
+            UI2VUYS2RQs209fCh1rAtQFHX3PRs+FInJPWmi0LgOxoGHjp3UqTwg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-11-11T21:28:35Z"
+    mac: ENC[AES256_GCM,data:5dGkSS45LQR8X0WHQocj05WdTNMY2QwE0VMW3K+a008OJTUzO+adOwBdg0w2GYoCO1B/PNSS6tbkKI9zuqm3dLjx2uHuZvRP9zuU7VLuGhF6EY39EdL/y0xYXaE2p7u+Ucnqv/kw1DQLMfYCTzmlVOQm9GUI2M0cbjQdodfwFG0=,iv:FzYjf+HXZK/cm2rvpT2RjuwM5jnMfJhlmqrEtFCnvLM=,tag:iQ7ifOevXs5EmOlXMGfmTQ==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

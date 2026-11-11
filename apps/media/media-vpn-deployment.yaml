@@ -191,24 +191,15 @@ spec:
             # Everything soularr and the rest of the stack rely on is declared
             # here rather than left in the PVC's slskd.yml. Port 2271 because
             # the NordVPN exit silently drops the obfuscated port 2242.
-            - name: SLSKD_SOULSEEK_ADDRESS
-              value: "vps.slsknet.org"
-            - name: SLSKD_SOULSEEK_PORT
-              value: "2271"
-            - name: SLSKD_DIRECTORIES_DOWNLOADS
-              value: "/mnt/media/downloads/slskd"
-            - name: SLSKD_DIRECTORIES_INCOMPLETE
-              value: "/mnt/media/downloads/slskd/incomplete"
-            # slskd's primary API key. The env form takes the documented
-            # tuple (role;cidr;key), so the secret holds the whole string.
-            - name: SLSKD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: slskd-api-keys
-                  key: primary_api_key
           volumeMounts:
             - name: slskd-config-vol
               mountPath: /app
+            # The whole slskd.yml is declarative, from the SOPS secret. The PVC
+            # keeps only runtime state (logs, database, downloads dir).
+            - name: slskd-config-file
+              mountPath: /app/slskd.yml
+              subPath: slskd.yml
+              readOnly: true
             - name: media
               mountPath: /mnt/media/downloads
               subPath: downloads
@@ -280,6 +271,9 @@ spec:
           hostPath:
             path: /dev/net/tun
             type: CharDevice
+        - name: slskd-config-file
+          secret:
+            secretName: slskd-config-file
         - name: slskd-config-vol
           persistentVolumeClaim:
             claimName: slskd-config
