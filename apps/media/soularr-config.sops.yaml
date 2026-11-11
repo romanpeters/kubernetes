@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: soularr-config
+    namespace: media
+    labels:
+        app.kubernetes.io/name: soularr
+        app.kubernetes.io/instance: soularr-prod
+        app.kubernetes.io/part-of: homelab
+        app.kubernetes.io/managed-by: flux
+        exposure: internal
+type: Opaque
+stringData:
+    config.ini: ENC[AES256_GCM,data:829kcmEqyzoFsSG79BhjsTNJClJh/1vrckDWH50ddhEAMgLFaqwMcu12v/PXvRRGTLinpP94IEszOvhqgwrXe9VNXZcRL7+vV4Jy1u/HuojOtJGnft5uWNPZkevqB+wXaqREuGZjRoD0OECTEF8KsZhS6LdSchxIekXzd6XP+C6l6X35bZhYL838UbzoQqhGzcnEzjgdVabhysyCpVB/YpJXm1fR4L2+Qiq+9wnNx0labW6cFfRQtG5FFPA1ZhYMaTMZ2hZj8RvQYW7gURNec3/SaIeevGoVwwnNWrxq9af64JcLzNPcNv9zg2eUEKDIKsZfvYt6HQ2VEmQADezfsw039GAmrYibSw+8VWnk2FftPIrevRPCVo0f9u8dP+Oefw9zIfuxu3tnkRSGz1KJzJaYjv2C1OFS19sAiZ28ywPt0h/1sovA1i3A+qAjfylE6UMuN2ckizoPaks3tlMjxohr4me03IZZLUaRKmT05gB8MqKI2KA1YWhBfLLVspwji+kC85XqAhIBMJfSKVNtQ9zo8QCCgMBtP9sOUe4o9s2H0XKs6F/vY/8wqIMpIHmrpNbNcmth1YkpxiK8UinW8s4FM/0Zb9ZZIDzEO9D/vxFPSDSSfJSx49iAHAzDn/scqeU4nwtJLbREUNASRTgfYJoaO+924Y9Bw21mQFyemVLaBoPnRR5iuY6RsPQpQ/IlPctquc3WREwllZLgovUUPWgvlcp136sBnqtQKsCG0RRjdyXkAuB+RIW544n5lx0NHNuMplO/E2cP/YDi6IbWa+vGirmS0H8Byq0CIgP+9asLg+3IbhRNrpkFELPG09vHLndJAaT9ds1DCd1UbdI5ZSAQWCbyYz4IOdZ4+JpIXgmXKR98eZNOW55Lx/aanilh6nwSc8iqfFqPu8yn9VCIHPJc1/WmzV6eIMhxdvmDmKLkx8+NrauuQ3xLtRI2HsE2fSAT+suMLx+FYEnzehWIUqxm/3fGSk2FS3jlqx/kV1txnstghqtXxJdZt1JTCzYmXhG2xEazug/5k85+2YlhtPVm8QffXxfOOjnS2GbS5tzEnKmTl5egl3erSSMZ4cUhUUEGODbNJv5V4rpuvKBjYw0xPLmI5xmX+LWPqvpyeiXpjomjB5LNlZ/zIyQLfobTqGoS3FfLHXODhHUsstLUIN7rVhBvH6E3T8DzsAiSqnwaHPXJkJsdC1iLNdOSRLrI5STzYRPDkyASVbbIz7ulqTcCnSLTdB9W9Y1EW7KWUVOr1iPRnD+AFcjIzwbclbeLCvt5Py8MSy2eC28h4NiPiFI/zTVKMspom2fu1HNckSc4YXxVOLjkmHiVIjlHkio5Jrq94ZFbKAZA/vduEn3kPIonaAb2iE1/QfV8Eov1R6oFCz4fWQw09D/e25jqJ95+bAjCCtT1gpbKTnDGYA3poK/oVh8daONdMw3T8dAFPZSUhdVxNxtxs3tTZbmFJRz3h0Jt2pGR+iOVMwkymPUyFMAi01clOlE0RL+sMKDLsE0mGOKRCCnY9XwD/pwfyQZXh4qPLGT3DZzqIFk5vJDdW1X/5bwX9CSXb/OVSf62BpojJLXpQg==,iv:LI2I8P4K7nAiimHIFhcB8h48mXD6QfTACqa5UOdE160=,tag:IOa3tYaIxlImPHJTn2d5zg==,type:str]
+sops:
+    age:
+        - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBxelR5Wmh2cEdUSXRHdnBF
+            Y2dZbWtQZGYvQkc3NkdwMTllSW1ZT2pmK2t3ClcwcnFCNEZseE5oMHFqdksyL01X
+            Y2R1V0dJVU9wZXlGcWxEUWVnVGplcXMKLS0tIHR4dWtzOW1qUW1jWjVMNWQ2aDdH
+            NUFnTWhWTFYzejUyOGdNU0NMVmY4V0kKd2OtSZLmOGnYBr/2bVsqaacYGvsP/LJn
+            UL8kYqtqGbwZvE8WmeEdVRKFNJcxD2oSSlAgetrMlzBwGc3Mkj3ebA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-11-11T20:51:14Z"
+    mac: ENC[AES256_GCM,data:dNdiqsfinMiNYmM1TU0/56PCerV/Riy1QVu+QtZ4BOUdg1UCSEFKptfZGDI74Z/+DkSAy1/fBkrg+QPs7YckuvCB4U2Ay9DFJlIYwh1FEbMOozdE9TwP5XqfZndHJvzKkwGtRNq6crndy/ewu/eqyscZyXx3fcdOEqLqPnHNVnM=,iv:o9c7mtOZ3+2xbpdEndRGZ5ZZY9DzG/2rt5z1pw/a3lo=,tag:L4n+E+PXoASUJPxCeyvJzg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

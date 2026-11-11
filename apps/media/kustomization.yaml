@@ -65,6 +65,8 @@ resources:
   - immich-server.yaml
   - audiobookshelf-redirect.yaml
   - immich-redirect.yaml
+  - soularr-config.sops.yaml
+  - soularr-deployment.yaml
   - slskd-soulseek.sops.yaml
   - slskd-service.yaml
   - slskd-ingress.yaml
