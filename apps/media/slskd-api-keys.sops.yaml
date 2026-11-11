@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: slskd-api-keys
+    namespace: media
+    labels:
+        app.kubernetes.io/name: slskd
+        app.kubernetes.io/instance: slskd-prod
+        app.kubernetes.io/part-of: homelab
+        app.kubernetes.io/managed-by: flux
+        exposure: internal
+type: Opaque
+stringData:
+    soularr_key: ENC[AES256_GCM,data:8mel3NMWesg9y1jq69kaHGKx/+WOHlS/c4mwpUfUqIw=,iv:eUO10xIs9t6aPs1GjitRcld+Y4LSJ3fIUsigQeowHJs=,tag:uNqgPigj/U8ReAh8D8fAOA==,type:str]
+sops:
+    age:
+        - recipient: age1txdhl8zae9a6kh6ggxydmrtstueysr32dd9fchlrp9x7n3ywhd7qzrn4k4
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB1dUlqR1JVME1xNEtYMFhX
+            bE5wekNRSDNRdUtSMFVIcDROMVE1UnRCSGhBCkt5SVRGSVUxR0dTb1o5UE16TUhQ
+            M29jU0dnbU1yVEpwVU9lRWN1QVJMNGcKLS0tIEpYR1dsYTA2L0JCcFB3QTd1UFM4
+            ZXRnWXk2dUorOHMrYTB2dTFyeGViRmMKETCO8oLWwjobAU8QYk1+oyMLVMdkKc6A
+            OOp2+q+/L2ZmrXRpwo6FvnLg09QNP4H/vtIBz+l8ToiKV5lot7clAA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-11-11T21:20:50Z"
+    mac: ENC[AES256_GCM,data:kPKEZEnX5Ok1bhTCEpo1z8HqeUHc16gZ3oi3EkeaiW/BGWbn7GuVYMIDRrPrGjzmryf18866X07cpqbb1S3k57HFz9/tnpTNTDJRjUFQhLfySkj0FY9R49+kVjAhXEP/iATSbZRazLfeQR30/HdH8Reve4WO4aHcSEtfJ7i/xGQ=,iv:JQwYAkH1B0LlNI2n5r6pAdKGNBhHDRZ/xwVfSdVOLWw=,tag:p7MuoFojYeNd7wwYlFKOEg==,type:str]
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0
