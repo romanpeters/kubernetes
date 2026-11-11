@@ -199,12 +199,13 @@ spec:
               value: "/mnt/media/downloads/slskd"
             - name: SLSKD_DIRECTORIES_INCOMPLETE
               value: "/mnt/media/downloads/slskd/incomplete"
-            # slskd exposes exactly one key via env: the "primary" API key.
+            # slskd's primary API key. The env form takes the documented
+            # tuple (role;cidr;key), so the secret holds the whole string.
             - name: SLSKD_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: slskd-api-keys
-                  key: soularr_key
+                  key: primary_api_key
           volumeMounts:
             - name: slskd-config-vol
               mountPath: /app
