@@ -199,13 +199,12 @@ spec:
               value: "/mnt/media/downloads/slskd"
             - name: SLSKD_DIRECTORIES_INCOMPLETE
               value: "/mnt/media/downloads/slskd/incomplete"
-            - name: SLSKD_WEB_AUTHENTICATION_API_KEYS_SOULARR_KEY
+            # slskd exposes exactly one key via env: the "primary" API key.
+            - name: SLSKD_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: slskd-api-keys
                   key: soularr_key
-            - name: SLSKD_WEB_AUTHENTICATION_API_KEYS_SOULARR_ROLE
-              value: "administrator"
           volumeMounts:
             - name: slskd-config-vol
               mountPath: /app
