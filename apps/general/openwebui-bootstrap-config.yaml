@@ -11,48 +11,69 @@ metadata:
     exposure: internal
 data:
   patch_ollama_config.py: |
+    """Seed open-webui's Ollama backend and SearxNG web search.
+
+    open-webui moved its config from one JSON row (id, data) to a key/value
+    table (key, value, updated_at). This script speaks the current schema and
+    leaves any schema it does not recognise alone rather than crash-looping the
+    pod: a wrong assumption here must never block the app from starting.
+    """
     import json
     import sqlite3
+    import time
     from pathlib import Path
 
-    db_path = Path("/app/backend/data/webui.db")
-    if not db_path.exists():
+    DB = Path("/app/backend/data/webui.db")
+    if not DB.exists():
         print("webui.db not found yet, skipping bootstrap patch")
         raise SystemExit(0)
 
-    conn = sqlite3.connect(db_path)
-    cur = conn.cursor()
-    row = cur.execute("SELECT id, data FROM config LIMIT 1").fetchone()
-    if row is None:
-        print("config row not found yet, skipping bootstrap patch")
-        conn.close()
+    conn = sqlite3.connect(DB)
+    cols = [row[1] for row in conn.execute("PRAGMA table_info(config)")]
+    if not cols:
+        print("config table missing, skipping bootstrap patch")
+        raise SystemExit(0)
+    if "key" not in cols or "value" not in cols:
+        print("unexpected config schema %s, skipping bootstrap patch" % (cols,))
         raise SystemExit(0)
 
-    config_id, raw = row
-    data = json.loads(raw)
+    now = int(time.time())
 
-    ollama = data.setdefault("ollama", {})
-    ollama["base_urls"] = ["https://ollama.romanpeters.nl"]
+    def get(key):
+        row = conn.execute("SELECT value FROM config WHERE key = ?", (key,)).fetchone()
+        if row is None:
+            return None
+        try:
+            return json.loads(row[0])
+        except (TypeError, ValueError):
+            return row[0]
 
-    api_configs = ollama.setdefault("api_configs", {})
+    def put(key, value):
+        conn.execute(
+            "INSERT INTO config (key, value, updated_at) VALUES (?, ?, ?) "
+            "ON CONFLICT(key) DO UPDATE SET value = excluded.value, "
+            "updated_at = excluded.updated_at",
+            (key, json.dumps(value), now),
+        )
+
+    # Ollama backend: external endpoint, no auth at the proxy layer.
+    put("ollama.enable", True)
+    put("ollama.base_urls", ["https://ollama.romanpeters.nl"])
+    api_configs = get("ollama.api_configs")
     if not isinstance(api_configs, dict):
         api_configs = {}
+    entry = api_configs.get("0")
+    if not isinstance(entry, dict):
+        entry = {}
+    entry.update({"enable": True, "auth_type": "none", "key": ""})
+    api_configs["0"] = entry
+    put("ollama.api_configs", api_configs)
 
-    if "0" not in api_configs or not isinstance(api_configs["0"], dict):
-        api_configs["0"] = {}
+    # Web search via the in-cluster SearxNG.
+    put("web.search.enable", True)
+    put("web.search.engine", "searxng")
+    put("web.search.searxng_query_url", "http://searxng.media.svc.cluster.local:8080/search")
 
-    api_configs["0"]["enable"] = True
-    api_configs["0"]["auth_type"] = "none"
-    api_configs["0"]["key"] = ""
-    ollama["api_configs"] = api_configs
-
-    web_search = data.setdefault("rag", {}).setdefault("web", {}).setdefault("search", {})
-    web_search["enable"] = True
-    web_search["engine"] = "searxng"
-    web_search["searxng_query_url"] = "http://searxng.media.svc.cluster.local:8080/search"
-    web_search["searxng_language"] = "all"
-
-    cur.execute("UPDATE config SET data = ? WHERE id = ?", (json.dumps(data), config_id))
     conn.commit()
     conn.close()
-    print("patched ollama + searxng web-search config")
+    print("patched ollama + searxng web-search config (key/value schema)")
