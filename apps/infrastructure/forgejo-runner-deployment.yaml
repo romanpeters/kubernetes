@@ -32,7 +32,7 @@ spec:
         # MinIO client (mc) is the S3 client used by workflows to talk to Garage.
         # Garage rejects rclone's SigV4 signing, but mc's is accepted.
         - name: install-mc
-          image: library/alpine:3.24@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a
+          image: library/alpine:3.24@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf
           command:
             - /bin/sh
             - -c
