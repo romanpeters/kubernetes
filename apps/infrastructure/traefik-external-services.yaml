@@ -94,7 +94,11 @@ metadata:
     exposure: internal
 spec:
   type: ExternalName
-  externalName: plex.internal
+  # Single-label on purpose: the UDM's local DNS answers "plex" reliably, but the
+  # "internal" suffix stopped resolving after a UniFi Network update (2026-11-19),
+  # which turned every plex.romanpeters.nl request into a 502. The other external
+  # services here already use bare names for the same reason.
+  externalName: plex
   ports:
     - name: http
       port: 32400
